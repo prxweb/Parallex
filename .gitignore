@@ -1,0 +1,9 @@
+# Secrets
+.env
+
+# Working screenshot artifacts
+temporary screenshots/
+
+# OS / editor
+Thumbs.db
+.DS_Store
