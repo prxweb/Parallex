@@ -103,9 +103,12 @@
     -webkit-backdrop-filter:blur(14px) saturate(140%);
     border-bottom:1px solid var(--bd2);
   }
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:84px}
-  .brand{display:flex;align-items:center;gap:12px}
-  .brand img{height:60px;width:auto;filter:brightness(0) invert(1)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:116px}
+  .brand{display:flex;flex-direction:column;justify-content:center;line-height:1}
+  .brand-name{font-family:var(--fh);font-size:48px;letter-spacing:-.01em;color:#fff;line-height:.95}
+  .brand-sub{font-family:var(--fb);font-size:13px;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:var(--muted);margin-top:9px;padding-left:3px;transition:color .3s var(--ease)}
+  .brand:hover .brand-sub{color:var(--blue)}
+  .brand:focus-visible{outline:2px solid #9fc0ff;outline-offset:4px;border-radius:6px}
   .nav-actions{display:flex;align-items:center;gap:14px}
   .lang-toggle{
     display:inline-flex;align-items:center;gap:6px;
@@ -318,6 +321,7 @@
   /* ---------- FOOTER ---------- */
   footer{padding-top:var(--py);position:relative;overflow:hidden}
   .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:54px;border-bottom:1px solid var(--bd2)}
+  .foot-logo{height:126px;width:auto;filter:brightness(0) invert(1);margin-bottom:24px}
   .foot-top h4{font-family:var(--fb);font-weight:700;font-size:15px;letter-spacing:.04em;margin-bottom:18px;color:#fff}
   .foot-col a,.foot-col p{display:block;color:var(--body);font-size:14px;margin-bottom:11px;transition:color .3s var(--ease)}
   .foot-col a:hover{color:var(--blue)}
@@ -346,6 +350,8 @@
   /* ---------- responsive ---------- */
   @media (max-width:1080px){
     :root{--px:var(--px-m)}
+    .nav-inner{height:100px}
+    .brand-name{font-size:40px}.brand-sub{font-size:12px;letter-spacing:.38em}
     .hero-grid,.process-grid,.faq-grid,.connect-grid{grid-template-columns:1fr;gap:40px}
     .proj-grid{grid-template-columns:repeat(2,1fr)}
     .tgrid{grid-template-columns:repeat(2,1fr)}
@@ -356,8 +362,8 @@
   }
   @media (max-width:680px){
     :root{--px:var(--px-s);--py:var(--py-s)}
-    .nav-inner{height:70px}
-    .brand img{height:48px}
+    .nav-inner{height:92px}
+    .brand-name{font-size:30px}.brand-sub{font-size:10px;letter-spacing:.32em;margin-top:6px}.foot-logo{height:104px}
     .nav-cta{display:none}
     .proj-grid{grid-template-columns:1fr}
     .tgrid{grid-template-columns:1fr}
@@ -375,8 +381,9 @@
 <!-- NAV -->
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="#" aria-label="Parallex home">
-      <img src="parallex-logo.png" alt="Parallex" />
+    <a class="brand" href="#" aria-label="Parallex Web Studio home">
+      <span class="brand-name">Parallex</span>
+      <span class="brand-sub">Web Studio</span>
     </a>
     <div class="nav-actions">
       <button class="lang-toggle" id="langToggle" aria-label="Switch language">
@@ -733,7 +740,7 @@
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-col">
-        <h4 data-en="Let's Connect" data-fr="Connectons-nous">Let's Connect</h4>
+        <img class="foot-logo" src="parallex-logo.png" alt="Parallex Web Studio" />
         <p class="foot-tag" data-en="Helping businesses grow through data-driven design and marketing since 2017." data-fr="Nous aidons les entreprises à croître grâce au design et au marketing axés sur les données depuis 2017.">Helping businesses grow through data-driven design and marketing since 2017.</p>
         <div class="socials">
           <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
