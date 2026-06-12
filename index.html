@@ -388,12 +388,19 @@
     .gallery{grid-template-columns:repeat(2,1fr)}
     .foot-top{grid-template-columns:1fr}
     .stats{gap:10px}
-    .stat{min-width:calc(50% - 5px)}
+    .stat{min-width:calc(50% - 5px);display:flex;flex-direction:column}
+    .stat b{font-size:19px;line-height:1.18;overflow-wrap:break-word}
+    .stat span{margin-top:auto;padding-top:10px}
     .phone-row{grid-template-columns:80px 1fr}
     .hero h1{font-size:34px}
     .phone-wrap,.faq-aside{display:none}
     .logos{justify-content:center;gap:16px 24px}
     .logos .lg{font-size:16px}
+    #why{padding-top:10px}
+  }
+  /* phones in landscape (short viewport) — hide the device mockups there too */
+  @media (orientation:landscape) and (max-height:540px){
+    .phone-wrap,.faq-aside{display:none}
   }
 </style>
 </head>
@@ -439,9 +446,9 @@
         </div>
         <div class="stats">
           <div class="stat"><b data-en="We make it easy" data-fr="On simplifie tout">We make it easy</b><span data-en="the technical stuff is on us" data-fr="on gère la technique">the technical stuff is on us</span></div>
-          <div class="stat"><b data-en="Under 2 wks" data-fr="Moins de 2 sem.">Under 2 wks</b><span data-en="start to finish" data-fr="du début à la fin">start to finish</span></div>
+          <div class="stat"><b data-en="Delivered in under 2 wks" data-fr="Livré en moins de 2 sem.">Delivered in under 2 wks</b><span data-en="start to finish" data-fr="du début à la fin">start to finish</span></div>
           <div class="stat"><b data-en="Ongoing support" data-fr="Soutien continu">Ongoing support</b><span data-en="we're always here" data-fr="toujours là pour vous">we're always here</span></div>
-          <div class="stat"><b data-en="Competitive" data-fr="Compétitif">Competitive</b><span data-en="pricing, no surprises" data-fr="tarifs, sans surprise">pricing, no surprises</span></div>
+          <div class="stat"><b data-en="Competitive pricing" data-fr="Tarifs compétitifs">Competitive pricing</b><span data-en="fair quotes, no hidden fees" data-fr="des prix justes, sans frais cachés">fair quotes, no hidden fees</span></div>
         </div>
       </div>
 
