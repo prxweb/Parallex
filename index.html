@@ -387,11 +387,10 @@
     .tgrid{grid-template-columns:1fr}
     .why-grid{grid-template-columns:1fr}
     .gallery{grid-template-columns:repeat(2,1fr)}
-    .foot-top{grid-template-columns:auto 1fr;column-gap:30px;row-gap:26px;align-items:start}
-    .foot-nav{display:none}
-    .foot-brand{grid-column:1;grid-row:1 / span 2}
-    .foot-contact{grid-column:2;grid-row:1}
-    .foot-legal{grid-column:2;grid-row:2}
+    .foot-top{grid-template-columns:1fr 1fr;column-gap:24px;row-gap:24px;align-items:start}
+    .foot-brand,.foot-nav{display:none}
+    .foot-contact{grid-column:1}
+    .foot-legal{grid-column:2}
     .stats{gap:10px}
     .stat{min-width:calc(50% - 5px);display:flex;flex-direction:column}
     .stat b{font-size:19px;line-height:1.18;overflow-wrap:break-word}
@@ -405,7 +404,7 @@
   }
   /* phones in landscape (short viewport) — hide the device mockups there too */
   @media (orientation:landscape) and (max-height:540px){
-    .phone-wrap,.faq-aside{display:none}
+    .phone-wrap,.faq-aside,.foot-brand,.foot-nav{display:none}
   }
 </style>
 </head>
@@ -450,9 +449,9 @@
           </div>
         </div>
         <div class="stats">
-          <div class="stat"><b data-en="We make it easy" data-fr="On simplifie tout">We make it easy</b><span data-en="from tech &amp; design to the content, we've got it" data-fr="on gère la technique, le design et le contenu">from tech &amp; design to the content, we've got it</span></div>
-          <div class="stat"><b data-en="Delivered in under 2 wks" data-fr="Livré en moins de 2 sem.">Delivered in under 2 wks</b><span data-en="start to finish" data-fr="du début à la fin">start to finish</span></div>
-          <div class="stat"><b data-en="Ongoing support" data-fr="Soutien continu">Ongoing support</b><span data-en="we're always here" data-fr="toujours là pour vous">we're always here</span></div>
+          <div class="stat"><b data-en="We make it easy" data-fr="On simplifie tout">We make it easy</b><span data-en="from tech &amp; design to content, we've got it" data-fr="on gère la technique, le design et le contenu">from tech &amp; design to content, we've got it</span></div>
+          <div class="stat"><b data-en="Delivered in under 2 wks" data-fr="Livré en moins de 2 sem.">Delivered in under 2 wks</b><span data-en="start to finish, no waiting around" data-fr="du début à la fin, sans attente">start to finish, no waiting around</span></div>
+          <div class="stat"><b data-en="Ongoing support" data-fr="Soutien continu">Ongoing support</b><span data-en="we're always here when you need us" data-fr="toujours là quand vous en avez besoin">we're always here when you need us</span></div>
           <div class="stat"><b data-en="Competitive pricing" data-fr="Tarifs compétitifs">Competitive pricing</b><span data-en="fair quotes, no hidden fees" data-fr="des prix justes, sans frais cachés">fair quotes, no hidden fees</span></div>
         </div>
       </div>
