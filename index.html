@@ -319,7 +319,7 @@
   .faq .ans{padding:0 22px 22px;color:var(--body);font-size:14.5px;line-height:1.7;animation:fade .4s var(--ease)}
   @keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 
-  .faq-aside{position:relative;display:flex;justify-content:center}
+  .faq-aside{position:relative;display:flex;justify-content:center;margin-top:38px}
   .faq-aside .phone{width:270px;aspect-ratio:270/560}
 
   /* mini website mockup rendered inside the FAQ phone screen */
@@ -373,7 +373,7 @@
   /* ---------- FOOTER ---------- */
   footer{padding-top:var(--py);position:relative;overflow:hidden}
   .foot-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;padding-bottom:54px;border-bottom:1px solid var(--bd2)}
-  .foot-logo{height:150px;width:auto;filter:brightness(0) invert(1);margin-bottom:24px}
+  .foot-logo{height:185px;width:auto;filter:brightness(0) invert(1);margin-bottom:24px}
   .foot-top h4{font-family:var(--fb);font-weight:700;font-size:15px;letter-spacing:.04em;margin-bottom:18px;color:#fff}
   .foot-col a,.foot-col p{display:block;color:var(--body);font-size:14px;margin-bottom:11px;transition:color .3s var(--ease)}
   .foot-col a:hover{color:var(--blue)}
@@ -411,7 +411,7 @@
     .gallery{grid-template-columns:repeat(3,1fr)}
     .foot-top{grid-template-columns:1fr 1fr}
     .connect{padding:40px}
-    .faq-aside{order:-1}
+    .faq-aside{order:-1;margin-top:0}
   }
   @media (max-width:680px){
     :root{--px:var(--px-s);--py:var(--py-s)}
@@ -440,8 +440,8 @@
     .connect{padding:30px 18px}
     .cpoint{font-size:13.5px;gap:10px}
     .form-card{padding:24px 18px}
-    .mobile-showcase{display:block}
-    .mobile-showcase .sec-head{margin-bottom:10px}
+    .mobile-showcase{display:block;padding:15px 0 50px}
+    .mobile-showcase .sec-head{margin-bottom:30px}
     .ms-row{display:flex;justify-content:center;align-items:center}
     .mobile-showcase .phone{width:300px}
     .mobile-showcase .phone:first-child{transform:scale(.46) rotate(-6deg);margin:-168px -54px -168px -28px;z-index:2}
