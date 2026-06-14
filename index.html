@@ -20,7 +20,7 @@
     --fh:'Dela Gothic One',sans-serif;
     --fb:'DM Sans',sans-serif;
     --px:64px; --px-m:28px; --px-s:20px;
-    --py:88px; --py-m:64px; --py-s:48px;
+    --py:74px; --py-m:54px; --py-s:40px;
     --maxw:1200px;
     --ease:cubic-bezier(.2,.7,.2,1);
   }
@@ -320,6 +320,20 @@
   .faq-aside{position:relative;display:flex;justify-content:center}
   .faq-aside .phone{width:270px;aspect-ratio:270/560}
 
+  /* mini website mockup rendered inside the FAQ phone screen */
+  .screen.mock::after{content:none}
+  .site{position:absolute;inset:0;overflow:hidden;background:#0b1220}
+  .site-hero{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .site-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,20,.5) 0%,rgba(8,12,20,0) 26%,rgba(8,12,20,.05) 52%,rgba(8,12,20,.88) 100%)}
+  .site-nav{position:absolute;top:34px;left:18px;right:18px;display:flex;align-items:center;justify-content:space-between;z-index:2}
+  .site-logo{font-family:var(--fh);font-size:13px;letter-spacing:.01em;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+  .site-burger{display:flex;flex-direction:column;gap:3px}
+  .site-burger i{width:16px;height:1.6px;background:#fff;border-radius:2px;display:block;box-shadow:0 1px 4px rgba(0,0,0,.4)}
+  .site-copy{position:absolute;left:18px;right:18px;bottom:24px;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+  .site-eyebrow{font-family:var(--fb);font-size:8px;font-weight:700;letter-spacing:.22em;color:#9fc0ff}
+  .site-h{font-family:var(--fh);font-size:22px;line-height:1.04;letter-spacing:-.02em;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.45)}
+  .site-btn{font-family:var(--fb);font-size:9.5px;font-weight:600;color:#fff;background:linear-gradient(135deg,#4d8bff,#1f4fd6);padding:8px 15px;border-radius:8px;margin-top:5px;box-shadow:0 8px 18px -8px rgba(77,141,255,.85)}
+
   /* ---------- CONNECT / CTA ---------- */
   .connect{
     border:1px solid var(--bd);border-radius:28px;overflow:hidden;position:relative;
@@ -548,7 +562,21 @@
         <div class="phone-wrap">
           <div class="phone">
             <div class="notch"></div>
-            <div class="screen"><img src="https://images.unsplash.com/photo-1759978238368-caabe1e79495?auto=format&fit=crop&q=80&w=600&h=1240" alt="Live website preview on mobile" /></div>
+            <div class="screen mock">
+              <div class="site" aria-hidden="true">
+                <img class="site-hero" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=600&h=1240" alt="" />
+                <div class="site-shade"></div>
+                <div class="site-nav">
+                  <span class="site-logo">MAISON ROUX</span>
+                  <span class="site-burger"><i></i><i></i><i></i></span>
+                </div>
+                <div class="site-copy">
+                  <span class="site-eyebrow" data-en="RESTAURANT · BISTRO" data-fr="RESTAURANT · BISTRO">RESTAURANT · BISTRO</span>
+                  <span class="site-h" data-en="A table worth the trip" data-fr="Une table qui vaut le détour">A table worth the trip</span>
+                  <span class="site-btn" data-en="Reserve a table" data-fr="Réserver une table">Reserve a table</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -607,10 +635,6 @@
             <div class="ans" data-en="We build for businesses where the website has a real job to do — service businesses, trades, clinics, shops and e-commerce, restaurants, and growing brands. If your site should be bringing in work and isn't, that's exactly what we fix." data-fr="Nous concevons pour les entreprises dont le site a un vrai rôle à jouer — services, métiers, cliniques, boutiques et commerce en ligne, restaurants et marques en croissance. Si votre site devrait générer des affaires sans y parvenir, c'est exactement ce que nous réglons.">We build for businesses where the website has a real job to do — service businesses, trades, clinics, shops and e-commerce, restaurants, and growing brands. If your site should be bringing in work and isn't, that's exactly what we fix.</div>
           </details>
           <details class="faq">
-            <summary><span data-en="Why not just update my existing site?" data-fr="Pourquoi ne pas simplement mettre à jour mon site actuel ?">Why not just update my existing site?</span><span class="ic"></span></summary>
-            <div class="ans" data-en="Most of the sites we look at have structural problems, not cosmetic ones — slow code, fuzzy positioning, and no clear path to a sale. Patching the surface rarely fixes that. A rebuild lets us fix the root: structure, copy, layout, and the mechanics that turn visitors into customers." data-fr="La plupart des sites que nous examinons ont des problèmes de structure, pas d'apparence — code lent, positionnement flou et aucun chemin clair vers la vente. Retoucher la surface règle rarement le fond. Une refonte nous permet de corriger la racine : structure, contenu, mise en page et la mécanique qui transforme les visiteurs en clients.">Most of the sites we look at have structural problems, not cosmetic ones — slow code, fuzzy positioning, and no clear path to a sale. Patching the surface rarely fixes that. A rebuild lets us fix the root: structure, copy, layout, and the mechanics that turn visitors into customers.</div>
-          </details>
-          <details class="faq">
             <summary><span data-en="How much does a project cost?" data-fr="Combien coûte un projet ?">How much does a project cost?</span><span class="ic"></span></summary>
             <div class="ans" data-en="Every project is custom-quoted to scope, and our pricing stays very competitive for the quality you get. Once we understand what you need, you'll get a clear, fixed price before any work begins — no surprises later." data-fr="Chaque projet est chiffré sur mesure selon la portée, et nos tarifs restent très compétitifs pour la qualité offerte. Une fois vos besoins compris, vous recevez un prix clair et fixe avant le début des travaux — aucune surprise par la suite.">Every project is custom-quoted to scope, and our pricing stays very competitive for the quality you get. Once we understand what you need, you'll get a clear, fixed price before any work begins — no surprises later.</div>
           </details>
@@ -635,7 +659,21 @@
       <aside class="faq-aside reveal" style="transition-delay:.1s">
         <div class="phone">
           <div class="notch"></div>
-          <div class="screen"><img src="https://images.unsplash.com/photo-1588177806780-51d021f6b2d2?auto=format&fit=crop&q=80&w=560&h=1160" alt="App preview" /></div>
+          <div class="screen mock">
+            <div class="site" aria-hidden="true">
+              <img class="site-hero" src="https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&q=80&w=560&h=1160" alt="" />
+              <div class="site-shade"></div>
+              <div class="site-nav">
+                <span class="site-logo">NORDHAUS</span>
+                <span class="site-burger"><i></i><i></i><i></i></span>
+              </div>
+              <div class="site-copy">
+                <span class="site-eyebrow" data-en="ARCHITECTURE STUDIO" data-fr="STUDIO D'ARCHITECTURE">ARCHITECTURE STUDIO</span>
+                <span class="site-h" data-en="Spaces that breathe" data-fr="Des espaces qui respirent">Spaces that breathe</span>
+                <span class="site-btn" data-en="View projects" data-fr="Voir les projets">View projects</span>
+              </div>
+            </div>
+          </div>
         </div>
       </aside>
     </div>
