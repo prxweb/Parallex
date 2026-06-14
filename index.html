@@ -440,8 +440,8 @@
     .connect{padding:30px 18px}
     .cpoint{font-size:13.5px;gap:10px}
     .form-card{padding:24px 18px}
-    .mobile-showcase{display:block;padding:15px 0 50px}
-    .mobile-showcase .sec-head{margin-bottom:30px}
+    .mobile-showcase{display:block;padding:0 0 64px;margin-top:-16px}
+    .mobile-showcase .sec-head{margin-bottom:60px}
     .ms-row{display:flex;justify-content:center;align-items:center}
     .mobile-showcase .phone{width:300px}
     .mobile-showcase .phone:first-child{transform:scale(.46) rotate(-6deg);margin:-168px -54px -168px -28px;z-index:2}
@@ -450,6 +450,12 @@
   /* phones in landscape (short viewport) — hide the device mockups there too */
   @media (orientation:landscape) and (max-height:540px){
     .phone-wrap,.faq-aside,.foot-brand,.foot-nav{display:none}
+    .mobile-showcase{display:block;padding:24px 0 40px;margin-top:0}
+    .mobile-showcase .sec-head{margin-bottom:54px}
+    .ms-row{display:flex;justify-content:center;align-items:center}
+    .mobile-showcase .phone{width:300px}
+    .mobile-showcase .phone:first-child{transform:scale(.46) rotate(-6deg);margin:-168px -54px -168px -28px;z-index:2}
+    .mobile-showcase .phone:last-child{transform:scale(.46) rotate(6deg);margin:-168px -28px -168px -54px}
   }
 </style>
 </head>
@@ -698,7 +704,7 @@
     <div class="faq-grid">
       <div class="reveal">
         <span class="eyebrow" data-en="FAQ" data-fr="FAQ">FAQ</span>
-        <h2 class="sec-head" style="margin-bottom:30px" data-en="Questions You're Probably Already Asking" data-fr="Les questions que vous vous posez sûrement déjà">Questions You're Probably Already Asking</h2>
+        <h2 class="sec-head" style="margin-bottom:30px" data-en="<span class='accent'>Questions</span> You're Probably Already Asking" data-fr="Les <span class='accent'>questions</span> que vous vous posez sûrement déjà"><span class="accent">Questions</span> You're Probably Already Asking</h2>
         <div class="faq-list">
           <details class="faq" open>
             <summary><span data-en="What kind of businesses do you work with?" data-fr="Avec quels types d'entreprises travaillez-vous ?">What kind of businesses do you work with?</span><span class="ic"></span></summary>
@@ -757,7 +763,7 @@
       <div class="connect-grid">
         <div>
           <span class="eyebrow" data-en="Contact" data-fr="Contact">Contact</span>
-          <h2 data-en="Let's Connect" data-fr="Connectons-nous">Let's Connect</h2>
+          <h2 data-en="Let's <span class='accent'>Connect</span>" data-fr="<span class='accent'>Connectons</span>-nous">Let's <span class="accent">Connect</span></h2>
           <p class="lead" data-en="Ready for a site that actually earns its keep? Book a free 30-minute strategy call. We'll talk through your business, what you want to build, and send you off with a clear plan and timeline." data-fr="Prêt pour un site qui rapporte vraiment ? Réservez un appel stratégique gratuit de 30 minutes. Nous discutons de votre entreprise, de ce que vous voulez bâtir, et vous repartez avec un plan et un échéancier clairs.">Ready for a site that actually earns its keep? Book a free 30-minute strategy call. We'll talk through your business, what you want to build, and send you off with a clear plan and timeline.</p>
           <div class="connect-points">
             <div class="cpoint"><span class="ck"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="#9fc0ff" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span><span data-en="A clear, no-pressure plan to take away" data-fr="Un plan clair et sans pression à emporter">A clear, no-pressure plan to take away</span></div>
