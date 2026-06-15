@@ -183,6 +183,12 @@
   .phone-row{display:grid;grid-template-columns:96px 1fr;gap:10px}
   .form-card .btn{width:100%;margin-top:6px}
   .form-card .fineprint{font-size:11.5px;color:var(--muted);text-align:center;margin-top:14px;line-height:1.5}
+  .hp-field{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+  .form-status{display:none;font-size:13px;line-height:1.5;text-align:center;margin-top:14px}
+  .form-status.show{display:block}
+  .form-status.ok{color:#7fd6a8}
+  .form-status.err{color:#ff9b9b}
+  .form-card button[disabled]{opacity:.6;cursor:progress;pointer-events:none}
 
   /* trusted strip */
   .trusted{padding-top:56px;border-top:1px solid var(--bd2);margin-top:8px}
@@ -509,9 +515,9 @@
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#4D8DFF" stroke-width="2.2" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg>
             <span data-en="Free 30-minute strategy call — no pressure" data-fr="Appel stratégique gratuit de 30 minutes">Free 30-minute strategy call — no pressure</span>
           </div>
-          <a class="hero-email" href="mailto:contact@parallex.ca">
+          <a class="hero-email" href="mailto:contact@parallexweb.com">
             <span data-en="Prefer email?" data-fr="Vous préférez écrire ?">Prefer email?</span>
-            <span class="hero-email-addr">contact@parallex.ca</span>
+            <span class="hero-email-addr">contact@parallexweb.com</span>
           </a>
         </div>
         <div class="stats">
@@ -523,36 +529,40 @@
       </div>
 
       <div class="reveal" style="transition-delay:.12s">
-        <form class="form-card" onsubmit="return false">
+        <form class="form-card" data-web3form>
           <h3 data-en="Book a Strategy Call" data-fr="Réserver un appel stratégique">Book a Strategy Call</h3>
           <p class="sub" data-en="30 minutes. No pressure. A clear plan to take away." data-fr="30 minutes. Sans pression. Un plan clair à emporter.">30 minutes. No pressure. A clear plan to take away.</p>
+          <input type="hidden" name="subject" value="New strategy call request — Parallex (Hero)" />
+          <input type="hidden" name="from_name" value="Parallex Website" />
+          <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="field">
             <label data-en="Full name" data-fr="Nom complet">Full name</label>
-            <input type="text" placeholder="Jane Doe" />
+            <input type="text" name="name" placeholder="Jane Doe" required />
           </div>
           <div class="field">
             <label data-en="Email" data-fr="Courriel">Email</label>
-            <input type="email" placeholder="jane@company.com" />
+            <input type="email" name="email" placeholder="jane@company.com" required />
           </div>
           <div class="field">
             <label data-en="Phone" data-fr="Téléphone">Phone</label>
             <div class="phone-row">
-              <select aria-label="Country code">
+              <select name="country_code" aria-label="Country code">
                 <option>+1</option><option>+44</option><option>+33</option><option>+61</option>
               </select>
-              <input type="tel" placeholder="(514) 000-0000" />
+              <input type="tel" name="phone" placeholder="(514) 000-0000" />
             </div>
           </div>
           <div class="field">
             <label data-en="How did you hear about us?" data-fr="Comment nous avez-vous connus ?">How did you hear about us?</label>
-            <select>
+            <select name="referral_source">
               <option data-en="Google" data-fr="Google">Google</option>
               <option data-en="LinkedIn" data-fr="LinkedIn">LinkedIn</option>
               <option data-en="Friend / Referral" data-fr="Ami / Recommandation">Friend / Referral</option>
               <option data-en="Other" data-fr="Autre">Other</option>
             </select>
           </div>
-          <button class="btn btn-primary" data-en="Book a Strategy Call" data-fr="Réserver un appel stratégique">Book a Strategy Call</button>
+          <button type="submit" class="btn btn-primary" data-en="Book a Strategy Call" data-fr="Réserver un appel stratégique">Book a Strategy Call</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
           <p class="fineprint" data-en="We'll reply within one business day." data-fr="Nous répondons en un jour ouvrable.">We'll reply within one business day.</p>
         </form>
       </div>
@@ -786,21 +796,25 @@
             <div class="cpoint"><span class="ck"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="#9fc0ff" stroke-width="2.4"><path d="M3 8.5l3.5 3.5L13 4.5"/></svg></span><span data-en="A realistic timeline and quote" data-fr="Un échéancier et un devis réalistes">A realistic timeline and quote</span></div>
           </div>
         </div>
-        <form class="form-card" onsubmit="return false">
+        <form class="form-card" data-web3form>
           <h3 data-en="Book a Strategy Call" data-fr="Réserver un appel stratégique">Book a Strategy Call</h3>
           <p class="sub" data-en="Tell us a little about your business." data-fr="Parlez-nous un peu de votre entreprise.">Tell us a little about your business.</p>
-          <div class="field"><label data-en="Full name" data-fr="Nom complet">Full name</label><input type="text" placeholder="Jane Doe" /></div>
-          <div class="field"><label data-en="Email" data-fr="Courriel">Email</label><input type="email" placeholder="jane@company.com" /></div>
+          <input type="hidden" name="subject" value="New strategy call request — Parallex (Contact)" />
+          <input type="hidden" name="from_name" value="Parallex Website" />
+          <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <div class="field"><label data-en="Full name" data-fr="Nom complet">Full name</label><input type="text" name="name" placeholder="Jane Doe" required /></div>
+          <div class="field"><label data-en="Email" data-fr="Courriel">Email</label><input type="email" name="email" placeholder="jane@company.com" required /></div>
           <div class="field"><label data-en="Phone" data-fr="Téléphone">Phone</label>
             <div class="phone-row">
-              <select aria-label="Country code"><option>+1</option><option>+44</option><option>+33</option><option>+61</option></select>
-              <input type="tel" placeholder="(514) 000-0000" />
+              <select name="country_code" aria-label="Country code"><option>+1</option><option>+44</option><option>+33</option><option>+61</option></select>
+              <input type="tel" name="phone" placeholder="(514) 000-0000" />
             </div>
           </div>
           <div class="field"><label data-en="How did you hear about us?" data-fr="Comment nous avez-vous connus ?">How did you hear about us?</label>
-            <select><option data-en="Google" data-fr="Google">Google</option><option data-en="LinkedIn" data-fr="LinkedIn">LinkedIn</option><option data-en="Friend / Referral" data-fr="Ami / Recommandation">Friend / Referral</option><option data-en="Other" data-fr="Autre">Other</option></select>
+            <select name="referral_source"><option data-en="Google" data-fr="Google">Google</option><option data-en="LinkedIn" data-fr="LinkedIn">LinkedIn</option><option data-en="Friend / Referral" data-fr="Ami / Recommandation">Friend / Referral</option><option data-en="Other" data-fr="Autre">Other</option></select>
           </div>
-          <button class="btn btn-primary" data-en="Book a Strategy Call" data-fr="Réserver un appel stratégique">Book a Strategy Call</button>
+          <button type="submit" class="btn btn-primary" data-en="Book a Strategy Call" data-fr="Réserver un appel stratégique">Book a Strategy Call</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
           <p class="fineprint" data-en="We'll reply within one business day." data-fr="Nous répondons en un jour ouvrable.">We'll reply within one business day.</p>
         </form>
       </div>
@@ -823,7 +837,7 @@
       </div>
       <div class="foot-col foot-contact">
         <h4 data-en="Get in touch" data-fr="Nous joindre">Get in touch</h4>
-        <a href="mailto:contact@parallex.ca">contact@parallex.ca</a>
+        <a href="mailto:contact@parallexweb.com">contact@parallexweb.com</a>
       </div>
       <div class="foot-col foot-legal">
         <h4 data-en="Legal" data-fr="Mentions légales">Legal</h4>
@@ -860,6 +874,51 @@
   setLang(saved === 'fr' ? 'fr' : 'en');
   document.getElementById('langToggle').addEventListener('click', () => {
     setLang(document.documentElement.getAttribute('data-lang') === 'en' ? 'fr' : 'en');
+  });
+
+  // ---------- Contact forms (Web3Forms) ----------
+  // Get a free access key at https://web3forms.com (sign up with contact@parallexweb.com),
+  // then paste it below. Submissions are emailed to that address.
+  const WEB3FORMS_ACCESS_KEY = '06e7a496-cdb2-4ab9-803d-e6e281cdab92';
+  const FORM_MSG = {
+    sending: { en: 'Sending…', fr: 'Envoi en cours…' },
+    success: { en: "Thanks! We'll be in touch within one business day.", fr: 'Merci ! Nous vous répondrons en un jour ouvrable.' },
+    error:   { en: 'Something went wrong — please email contact@parallexweb.com.', fr: 'Une erreur est survenue — écrivez-nous à contact@parallexweb.com.' }
+  };
+  const curLang = () => document.documentElement.getAttribute('data-lang') === 'fr' ? 'fr' : 'en';
+
+  document.querySelectorAll('form[data-web3form]').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = form.querySelector('.form-status');
+      const btn = form.querySelector('button[type="submit"]');
+      const lang = curLang();
+      status.className = 'form-status show';
+      status.textContent = FORM_MSG.sending[lang];
+      btn.disabled = true;
+      const data = new FormData(form);
+      data.append('access_key', WEB3FORMS_ACCESS_KEY);
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: data
+        });
+        const json = await res.json();
+        if (json.success) {
+          status.className = 'form-status show ok';
+          status.textContent = FORM_MSG.success[lang];
+          form.reset();
+        } else {
+          throw new Error(json.message || 'failed');
+        }
+      } catch (err) {
+        status.className = 'form-status show err';
+        status.textContent = FORM_MSG.error[lang];
+      } finally {
+        btn.disabled = false;
+      }
+    });
   });
 
   // ---------- Scroll reveal ----------
