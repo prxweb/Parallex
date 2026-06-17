@@ -179,6 +179,7 @@
   .field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%2356677e' stroke-width='2'%3E%3Cpath d='M3 5l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
   /* opaque dropdown list so options are readable on desktop (native popup ignored the translucent select bg) */
   .field select option{background:#172A46;color:#fff}
+  .field select:has(option[value=""]:checked){color:#56677e}
   .field input:focus,.field select:focus{outline:none;border-color:var(--blue);background:rgba(77,141,255,.06);box-shadow:0 0 0 3px rgba(77,141,255,.15)}
   .phone-row{display:grid;grid-template-columns:96px 1fr;gap:10px}
   .form-card .btn{width:100%;margin-top:6px}
@@ -547,7 +548,7 @@
             <label data-en="Phone" data-fr="Téléphone">Phone</label>
             <div class="phone-row">
               <select name="country_code" aria-label="Country code">
-                <option>+1</option><option>+44</option><option>+33</option><option>+61</option>
+                <option>+1</option><option>+44</option><option>+33</option><option>+49</option><option>+34</option><option>+39</option><option>+31</option><option>+32</option><option>+41</option><option>+351</option><option>+353</option><option>+52</option><option>+61</option><option>+91</option><option>+971</option>
               </select>
               <input type="tel" name="phone" placeholder="(514) 000-0000" />
             </div>
@@ -555,6 +556,7 @@
           <div class="field">
             <label data-en="How did you hear about us?" data-fr="Comment nous avez-vous connus ?">How did you hear about us?</label>
             <select name="referral_source">
+              <option value="" selected data-en="Select one" data-fr="Sélectionnez">Select one</option>
               <option data-en="Google" data-fr="Google">Google</option>
               <option data-en="LinkedIn" data-fr="LinkedIn">LinkedIn</option>
               <option data-en="Friend / Referral" data-fr="Ami / Recommandation">Friend / Referral</option>
@@ -806,12 +808,12 @@
           <div class="field"><label data-en="Email" data-fr="Courriel">Email</label><input type="email" name="email" placeholder="jane@company.com" required /></div>
           <div class="field"><label data-en="Phone" data-fr="Téléphone">Phone</label>
             <div class="phone-row">
-              <select name="country_code" aria-label="Country code"><option>+1</option><option>+44</option><option>+33</option><option>+61</option></select>
+              <select name="country_code" aria-label="Country code"><option>+1</option><option>+44</option><option>+33</option><option>+49</option><option>+34</option><option>+39</option><option>+31</option><option>+32</option><option>+41</option><option>+351</option><option>+353</option><option>+52</option><option>+61</option><option>+91</option><option>+971</option></select>
               <input type="tel" name="phone" placeholder="(514) 000-0000" />
             </div>
           </div>
           <div class="field"><label data-en="How did you hear about us?" data-fr="Comment nous avez-vous connus ?">How did you hear about us?</label>
-            <select name="referral_source"><option data-en="Google" data-fr="Google">Google</option><option data-en="LinkedIn" data-fr="LinkedIn">LinkedIn</option><option data-en="Friend / Referral" data-fr="Ami / Recommandation">Friend / Referral</option><option data-en="Other" data-fr="Autre">Other</option></select>
+            <select name="referral_source"><option value="" selected data-en="Select one" data-fr="Sélectionnez">Select one</option><option data-en="Google" data-fr="Google">Google</option><option data-en="LinkedIn" data-fr="LinkedIn">LinkedIn</option><option data-en="Friend / Referral" data-fr="Ami / Recommandation">Friend / Referral</option><option data-en="Other" data-fr="Autre">Other</option></select>
           </div>
           <button type="submit" class="btn btn-primary" data-en="Book a Strategy Call" data-fr="Réserver un appel stratégique">Book a Strategy Call</button>
           <p class="form-status" role="status" aria-live="polite"></p>
@@ -883,9 +885,24 @@
   const FORM_MSG = {
     sending: { en: 'Sending…', fr: 'Envoi en cours…' },
     success: { en: "Thanks! We'll be in touch within one business day.", fr: 'Merci ! Nous vous répondrons en un jour ouvrable.' },
-    error:   { en: 'Something went wrong — please email contact@parallexweb.com.', fr: 'Une erreur est survenue — écrivez-nous à contact@parallexweb.com.' }
+    error:   { en: 'Something went wrong — please email contact@parallexweb.com.', fr: 'Une erreur est survenue — écrivez-nous à contact@parallexweb.com.' },
+    invalidEmail: { en: 'Please enter a valid email address.', fr: 'Veuillez entrer une adresse courriel valide.' },
+    invalidPhone: { en: 'Please enter a valid phone number.', fr: 'Veuillez entrer un numéro de téléphone valide.' },
+    rateLimited:  { en: 'Too many submissions. Please wait a few minutes and try again.', fr: 'Trop d’envois. Veuillez patienter quelques minutes et réessayer.' }
   };
   const curLang = () => document.documentElement.getAttribute('data-lang') === 'fr' ? 'fr' : 'en';
+
+  // Client-side throttle: at most MAX successful submissions per WINDOW (bypassable; UX guard only).
+  const THROTTLE_KEY = 'parallex-submits', THROTTLE_MAX = 3, THROTTLE_WINDOW = 5 * 60 * 1000;
+  const recentSubmits = () => {
+    try { return (JSON.parse(localStorage.getItem(THROTTLE_KEY)) || []).filter(t => Date.now() - t < THROTTLE_WINDOW); }
+    catch (e) { return []; }
+  };
+  const recordSubmit = () => {
+    try { localStorage.setItem(THROTTLE_KEY, JSON.stringify([...recentSubmits(), Date.now()])); } catch (e) {}
+  };
+  const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+  const isPhone = (v) => /^[+0-9()\-.\s]+$/.test(v) && (v.replace(/\D/g, '').length >= 7 && v.replace(/\D/g, '').length <= 15);
 
   document.querySelectorAll('form[data-web3form]').forEach((form) => {
     form.addEventListener('submit', async (e) => {
@@ -893,6 +910,17 @@
       const status = form.querySelector('.form-status');
       const btn = form.querySelector('button[type="submit"]');
       const lang = curLang();
+      const fail = (key, field) => {
+        status.className = 'form-status show err';
+        status.textContent = FORM_MSG[key][lang];
+        if (field) field.focus();
+      };
+
+      // Guards: throttle, then email, then phone (only if provided).
+      if (recentSubmits().length >= THROTTLE_MAX) { fail('rateLimited'); return; }
+      if (!isEmail(form.email.value)) { fail('invalidEmail', form.email); return; }
+      if (form.phone.value.trim() && !isPhone(form.phone.value)) { fail('invalidPhone', form.phone); return; }
+
       status.className = 'form-status show';
       status.textContent = FORM_MSG.sending[lang];
       btn.disabled = true;
@@ -906,6 +934,7 @@
         });
         const json = await res.json();
         if (json.success) {
+          recordSubmit();
           status.className = 'form-status show ok';
           status.textContent = FORM_MSG.success[lang];
           form.reset();
