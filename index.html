@@ -80,8 +80,9 @@
     font-family:var(--fb);font-weight:600;font-size:15px;
     padding:15px 26px;border-radius:12px;border:1px solid transparent;cursor:pointer;
     transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease),border-color .35s var(--ease);
-    will-change:transform;
   }
+  /* promote a compositor layer only while interacting — not permanently for every button */
+  .btn:hover,.btn:active,.btn:focus-visible{will-change:transform}
   .btn-primary{
     color:#fff;
     /* gradient painted to the border-box so the 1px transparent border is the exact same gradient as the fill */
@@ -377,7 +378,7 @@
     padding:64px;
     box-shadow:0 60px 120px -60px rgba(0,0,0,.9),0 0 0 1px rgba(77,141,255,.06)}
   .connect::before{content:"";position:absolute;top:-30%;left:-10%;width:55%;height:90%;background:radial-gradient(closest-side,rgba(77,141,255,.22),transparent);pointer-events:none}
-  .connect-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center;position:relative;z-index:1}
+  .connect-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:start;position:relative;z-index:1}
   .connect h2{font-size:clamp(28px,3.4vw,44px);margin-bottom:18px}
   .connect .lead{margin-bottom:26px}
   .connect-points{display:flex;flex-direction:column;gap:14px;margin-top:6px}
@@ -625,7 +626,7 @@
             <div class="notch"></div>
             <div class="screen mock">
               <div class="site resto" aria-hidden="true">
-                <img class="site-hero" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=600&h=1240" alt="" />
+                <img class="site-hero" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=600&h=1240" alt="" loading="lazy" decoding="async" />
                 <div class="site-shade"></div>
                 <div class="site-nav">
                   <span class="site-logo">MAISON ROUX</span>
@@ -657,7 +658,7 @@
         <div class="notch"></div>
         <div class="screen mock">
           <div class="site resto" aria-hidden="true">
-            <img class="site-hero" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=600&h=1240" alt="" />
+            <img class="site-hero" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=600&h=1240" alt="" loading="lazy" decoding="async" />
             <div class="site-shade"></div>
             <div class="site-nav"><span class="site-logo">MAISON ROUX</span><span class="site-burger"><i></i><i></i><i></i></span></div>
             <div class="site-copy">
@@ -672,7 +673,7 @@
         <div class="notch"></div>
         <div class="screen mock">
           <div class="site arch" aria-hidden="true">
-            <img class="site-hero" src="https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&q=80&w=560&h=1160" alt="" />
+            <img class="site-hero" src="https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&q=80&w=560&h=1160" alt="" loading="lazy" decoding="async" />
             <div class="site-shade"></div>
             <div class="site-nav"><span class="site-logo">NORDHAUS</span><span class="site-burger"><i></i><i></i><i></i></span></div>
             <div class="site-copy">
@@ -764,7 +765,7 @@
           <div class="notch"></div>
           <div class="screen mock">
             <div class="site arch" aria-hidden="true">
-              <img class="site-hero" src="https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&q=80&w=560&h=1160" alt="" />
+              <img class="site-hero" src="https://images.unsplash.com/photo-1551038247-3d9af20df552?auto=format&fit=crop&q=80&w=560&h=1160" alt="" loading="lazy" decoding="async" />
               <div class="site-shade"></div>
               <div class="site-nav">
                 <span class="site-logo">NORDHAUS</span>
@@ -829,7 +830,7 @@
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-col foot-brand">
-        <img class="foot-logo" src="parallex-logo.png" alt="Parallex Web Studio" />
+        <img class="foot-logo" src="parallex-logo.png" alt="Parallex Web Studio" loading="lazy" decoding="async" />
       </div>
       <div class="foot-col foot-nav">
         <h4 data-en="Navigate" data-fr="Navigation">Navigate</h4>
@@ -1079,31 +1080,18 @@
       return s;
     };
 
-    const program = gl.createProgram();
-    gl.attachShader(program, compile(gl.VERTEX_SHADER, vsSource));
-    gl.attachShader(program, compile(gl.FRAGMENT_SHADER, fsSource));
-    gl.linkProgram(program);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      console.error('Shader link error:', gl.getProgramInfoLog(program));
-      return;
-    }
+    // GL resources live in outer scope and are (re)created by initGL() so the
+    // background can rebuild itself if the GPU context is lost — which commonly
+    // happens when the machine sleeps and the graphics driver resets.
+    let program, positionBuffer, aPos, uRes, uTime, glReady = false;
 
-    const positionBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
-
-    const aPos = gl.getAttribLocation(program, 'aVertexPosition');
-    const uRes = gl.getUniformLocation(program, 'iResolution');
-    const uTime = gl.getUniformLocation(program, 'iTime');
-
+    // Background is a soft, blurry plasma, so render at 1x density rather than
+    // the screen's 2x: up to ~4x fewer pixels to shade, no perceptible change.
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.floor(window.innerWidth * dpr);
-      canvas.height = Math.floor(window.innerHeight * dpr);
-      gl.viewport(0, 0, canvas.width, canvas.height);
+      canvas.width = Math.floor(window.innerWidth);
+      canvas.height = Math.floor(window.innerHeight);
+      if (glReady) gl.viewport(0, 0, canvas.width, canvas.height);
     };
-    window.addEventListener('resize', resize);
-    resize();
 
     const draw = (t) => {
       gl.clearColor(0, 0, 0, 1);
@@ -1117,13 +1105,89 @@
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     };
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      draw(8.0); // single static frame for reduced-motion users
-    } else {
-      const start = Date.now();
-      const loop = () => { draw((Date.now() - start) / 1000); requestAnimationFrame(loop); };
-      requestAnimationFrame(loop);
-    }
+    const initGL = () => {
+      const vs = compile(gl.VERTEX_SHADER, vsSource);
+      const fs = compile(gl.FRAGMENT_SHADER, fsSource);
+      if (!vs || !fs) return false;
+      program = gl.createProgram();
+      gl.attachShader(program, vs);
+      gl.attachShader(program, fs);
+      gl.linkProgram(program);
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        console.error('Shader link error:', gl.getProgramInfoLog(program));
+        return false;
+      }
+      positionBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+      aPos = gl.getAttribLocation(program, 'aVertexPosition');
+      uRes = gl.getUniformLocation(program, 'iResolution');
+      uTime = gl.getUniformLocation(program, 'iTime');
+      glReady = true;
+      resize();
+      return true;
+    };
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // The clock only advances while the tab is visible, so it never balloons
+    // during a long sleep (the cause of the float-precision stutter on return)
+    // and resumes smoothly. Capped to ~30fps — the drift is slow enough that
+    // this is invisible, but it roughly halves the background's GPU cost.
+    const FRAME_MS = 1000 / 30;
+    let elapsed = 0, last = 0, rafId = 0, running = false;
+
+    const frame = (now) => {
+      rafId = requestAnimationFrame(frame);
+      const dt = now - last;
+      if (dt < FRAME_MS) return;
+      last = now - (dt % FRAME_MS);
+      elapsed += dt / 1000;
+      if (glReady) draw(elapsed);
+    };
+
+    const startLoop = () => {
+      if (running || reduced || !glReady) return;
+      running = true;
+      last = performance.now();
+      rafId = requestAnimationFrame(frame);
+    };
+    const stopLoop = () => {
+      running = false;
+      cancelAnimationFrame(rafId);
+    };
+
+    // Draw the right thing for the current state: one static frame for
+    // reduced-motion users, otherwise (re)start the animation loop.
+    const render = () => {
+      if (!glReady) return;
+      if (reduced) draw(8.0);
+      else startLoop();
+    };
+
+    // While animating, the loop picks up the new size next frame; only a static
+    // (reduced-motion) frame needs an explicit redraw here.
+    window.addEventListener('resize', () => { resize(); if (reduced) render(); });
+
+    // Pause completely while the tab is hidden; re-measure and resume on return.
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) { stopLoop(); return; }
+      resize();
+      render();
+    });
+
+    // Recover from a lost GPU context instead of staying frozen/blank.
+    canvas.addEventListener('webglcontextlost', (e) => {
+      e.preventDefault();          // required for the context to be restorable
+      glReady = false;
+      stopLoop();
+    }, false);
+    canvas.addEventListener('webglcontextrestored', () => {
+      if (initGL()) render();
+    }, false);
+
+    // ---- startup ----
+    if (initGL() && !document.hidden) render();
   })();
 </script>
 </body>
