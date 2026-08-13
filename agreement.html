@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Client Service Agreement — Parallex Web Studio</title>
+<meta name="description" content="The agreement that governs your Parallex Web Studio website build and annual service." />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
+<meta name="googlebot" content="noindex, nofollow" />
+<meta name="referrer" content="no-referrer" />
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0F1A2E; --bg1:#13213A; --bg2:#172A46; --surface:#1B2A47;
+    --blue:#4D8DFF; --blue2:#1747C4; --gold:#F2B45C; --ink:#EAF0FA;
+    --bd:rgba(77,141,255,.16); --bd2:rgba(255,255,255,.08);
+    --muted:#7385A0; --body:#A6B6CF;
+    --fh:'Dela Gothic One',sans-serif; --fb:'DM Sans',sans-serif;
+    --px:64px; --px-m:28px; --px-s:20px; --maxw:1200px; --readw:780px;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);font-family:var(--fb);color:#fff;
+    overflow-x:hidden;line-height:1.6;position:relative;
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  }
+  /* calm, static brand backdrop — readability first (no animated shader on a reading page) */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+    background:
+      radial-gradient(120% 70% at 85% -10%, rgba(77,141,255,.14), transparent 60%),
+      radial-gradient(90% 60% at -10% 0%, rgba(23,71,196,.12), transparent 55%),
+      linear-gradient(180deg, var(--bg1), var(--bg));
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:rgba(77,141,255,.35);color:#fff}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--px)}
+
+  /* language toggle: hide inactive language blocks */
+  html[data-lang="en"] .l-fr{display:none}
+  html[data-lang="fr"] .l-en{display:none}
+
+  h1,h2,h3{font-family:var(--fh);font-weight:400;line-height:1.1;letter-spacing:-.03em;color:var(--ink)}
+  .accent{color:var(--gold)}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:60;
+    background:rgba(15,26,46,.72);
+    backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid var(--bd2);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:96px}
+  .brand{display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+  .brand-name{font-family:var(--fh);font-size:36px;letter-spacing:-.01em;color:#fff;line-height:.95}
+  .brand-sub{display:flex;align-items:center;gap:9px;align-self:stretch;margin-top:9px}
+  .brand-rule{flex:1 1 auto;height:1px;background:rgba(120,138,160,.42)}
+  .brand-sub-text{font-family:var(--fb);font-size:12px;font-weight:600;letter-spacing:.4em;text-transform:uppercase;white-space:nowrap;color:var(--blue);padding-left:.4em}
+  .brand:focus-visible{outline:2px solid #9fc0ff;outline-offset:4px;border-radius:6px}
+  .nav-actions{display:flex;align-items:center;gap:14px}
+  .lang-toggle{
+    display:inline-flex;align-items:center;gap:6px;font-family:var(--fb);font-weight:600;font-size:13px;color:var(--body);
+    background:rgba(255,255,255,.03);border:1px solid var(--bd2);border-radius:10px;padding:9px 12px;cursor:pointer;
+    transition:border-color .3s var(--ease),color .3s var(--ease),background .3s var(--ease);
+  }
+  .lang-toggle:hover{border-color:var(--bd);color:#fff}
+  .lang-toggle .on{color:var(--blue)}
+  .lang-toggle:focus-visible{outline:2px solid #9fc0ff;outline-offset:3px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--fb);font-weight:600;font-size:14px;
+    padding:11px 18px;border-radius:11px;border:1px solid transparent;cursor:pointer;
+    transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .35s var(--ease),border-color .35s var(--ease);
+  }
+  .btn-ghost{color:#fff;background:rgba(255,255,255,.03);border:1px solid var(--bd2)}
+  .btn-ghost:hover{transform:translateY(-2px);border-color:var(--bd);background:rgba(77,141,255,.08)}
+  .btn-ghost:focus-visible{outline:2px solid #9fc0ff;outline-offset:3px}
+  .btn-ghost svg{transition:transform .35s var(--ease)}
+  .btn-ghost:hover svg{transform:translateX(-3px)}
+
+  /* ---------- DOC ---------- */
+  .doc{padding:72px 0 40px}
+  .doc-head{max-width:var(--readw);margin-bottom:14px}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:18px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,var(--blue),transparent)}
+  .eyebrow::after{content:"";width:26px;height:1px;background:linear-gradient(90deg,transparent,var(--blue))}
+  .doc-head h1{font-size:clamp(34px,5vw,52px);margin-bottom:16px}
+  .updated{color:var(--muted);font-size:13.5px;letter-spacing:.02em}
+  .intro{max-width:var(--readw);color:var(--body);font-size:17px;line-height:1.75;margin:26px 0 8px}
+
+  .content{max-width:var(--readw);padding-bottom:40px}
+  .toc{
+    border:1px solid var(--bd2);border-radius:16px;padding:22px 26px;margin:30px 0 44px;
+    background:linear-gradient(180deg,var(--bg2),rgba(11,15,26,.4));
+    box-shadow:0 18px 40px -32px rgba(77,141,255,.5);
+  }
+  .toc h2{font-family:var(--fb);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .toc ol{list-style:none;counter-reset:t;display:grid;grid-template-columns:1fr 1fr;gap:8px 28px}
+  .toc li{counter-increment:t;font-size:14px}
+  .toc a{display:flex;gap:10px;color:var(--body);padding:3px 0;transition:color .25s var(--ease)}
+  /* min-width holds the number column: this list runs to 27, and the loaded DM Sans
+     ignores tabular-nums, so numbers containing 1 would otherwise sit narrow and ragged */
+  .toc a::before{content:counter(t,decimal-leading-zero);color:var(--blue);font-weight:600;font-variant-numeric:tabular-nums;min-width:21px}
+  .toc a:hover{color:#fff}
+
+  .content section{padding:26px 0;border-top:1px solid var(--bd2);scroll-margin-top:120px}
+  .content section:first-of-type{border-top:0}
+  .content h2{font-family:var(--fb);font-weight:700;font-size:21px;letter-spacing:-.01em;color:#fff;margin-bottom:14px;display:flex;align-items:baseline;gap:12px}
+  .content h2 .n{font-family:var(--fh);font-size:14px;color:var(--blue);flex:0 0 auto}
+  .content h3{font-family:var(--fb);font-weight:600;font-size:16px;color:var(--ink);margin:20px 0 8px}
+  .content p{color:var(--body);font-size:15.5px;line-height:1.78;margin-bottom:14px}
+  .content p:last-child{margin-bottom:0}
+  .content ul{list-style:none;margin:6px 0 16px;display:flex;flex-direction:column;gap:10px}
+  .content li{position:relative;padding-left:24px;color:var(--body);font-size:15.5px;line-height:1.7}
+  .content li::before{content:"";position:absolute;left:4px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 3px rgba(77,141,255,.14)}
+  .content a.inline{color:var(--blue);font-weight:600;border-bottom:1px solid rgba(77,141,255,.35);transition:border-color .25s var(--ease)}
+  .content a.inline:hover{border-color:var(--blue)}
+  .content strong{color:var(--ink);font-weight:600}
+  .content em{color:var(--body)}
+  .ph{color:var(--gold);font-style:italic}
+
+  .callout{
+    border:1px solid var(--bd);border-radius:14px;padding:18px 20px;margin:8px 0 16px;
+    background:rgba(77,141,255,.06);color:var(--body);font-size:14.5px;line-height:1.7;
+  }
+  .callout strong{color:var(--ink)}
+  .callout p{font-size:14.5px !important;line-height:1.7 !important}
+
+  /* ---------- ACCEPTANCE ---------- */
+  .accept{
+    max-width:var(--readw);margin:8px 0 4px;
+    border:1px solid var(--bd);border-radius:20px;padding:32px 34px 28px;
+    background:linear-gradient(180deg,var(--bg2),rgba(11,15,26,.55));
+    box-shadow:0 1px 0 rgba(255,255,255,.05) inset,0 26px 60px -40px rgba(77,141,255,.55);
+  }
+  .accept h2{font-family:var(--fh);font-weight:400;font-size:clamp(24px,3.6vw,32px);letter-spacing:-.03em;color:var(--ink);margin-bottom:14px}
+  .accept p{color:var(--body);font-size:15.5px;line-height:1.78}
+  .accept-parties{
+    border-top:1px solid var(--bd2);margin-top:24px;padding-top:20px;
+    color:var(--muted);font-size:13.5px;line-height:1.8;
+  }
+  .accept-parties strong{color:var(--ink);font-weight:600}
+  .accept-parties a{color:var(--blue);transition:color .25s var(--ease)}
+  .accept-parties a:hover{color:#9fc0ff}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--bd2);margin-top:24px}
+  .foot-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:28px 0 36px;color:var(--muted);font-size:13px}
+  .foot-inner .links{display:flex;gap:22px;flex-wrap:wrap}
+  .foot-inner a{transition:color .25s var(--ease)}
+  .foot-inner a:hover{color:#fff}
+
+  @media (max-width:1080px){:root{--px:var(--px-m)}}
+  @media (max-width:680px){
+    :root{--px:var(--px-s)}
+    .nav-inner{height:84px}.brand-name{font-size:28px}.brand-sub-text{font-size:10.5px;letter-spacing:.3em}
+    .btn .lbl-full{display:none}
+    .toc ol{grid-template-columns:1fr}
+    .doc{padding-top:48px}
+    .accept{padding:26px 22px 24px;border-radius:16px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html" aria-label="Parallex Web Studio home">
+      <span class="brand-name">Parallex</span>
+      <span class="brand-sub">
+        <span class="brand-rule" aria-hidden="true"></span>
+        <span class="brand-sub-text">Web Studio</span>
+        <span class="brand-rule" aria-hidden="true"></span>
+      </span>
+    </a>
+    <div class="nav-actions">
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+        <span class="en-lbl on">EN</span><span aria-hidden="true">/</span><span class="fr-lbl">FR</span>
+      </button>
+      <a href="index.html" class="btn btn-ghost">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>
+        <span class="lbl-full" data-en="Back to site" data-fr="Retour au site">Back to site</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- DOC -->
+<main class="doc">
+  <div class="wrap">
+    <div class="doc-head">
+      <span class="eyebrow" data-en="Agreement" data-fr="Entente">Agreement</span>
+      <h1 data-en="Client Service <span class='accent'>Agreement</span>" data-fr="Entente de <span class='accent'>service client</span>">Client Service <span class="accent">Agreement</span></h1>
+      <p class="updated" data-en="Version 1.0 — Last updated: August 12, 2026" data-fr="Version 1.0 — Dernière mise à jour : 12 août 2026">Version 1.0 — Last updated: August 12, 2026</p>
+    </div>
+
+    <!-- ===================== ENGLISH ===================== -->
+    <div class="l-en">
+      <p class="intro">This Agreement sets out the terms on which Parallex Web Studio (“Parallex,” “we,” “us”) builds and supports your website. It applies alongside the Terms &amp; Conditions published at parallexweb.com; where the two differ, this Agreement governs.</p>
+
+      <div class="content">
+        <div class="callout">
+          <p><strong>How you accept.</strong> You accept this Agreement by signing it electronically. Your electronic signature has the same effect as a handwritten one. We will email you a copy of the exact version you signed, and that version governs your Project. Payment of the Build Fee also constitutes acceptance.</p>
+        </div>
+
+        <nav class="toc" aria-label="Table of contents">
+          <h2>On this page</h2>
+          <ol>
+            <li><a href="#a-definitions">Definitions</a></li>
+            <li><a href="#a-scope">Scope</a></li>
+            <li><a href="#a-fee">Build Fee</a></li>
+            <li><a href="#a-you">Your responsibilities</a></li>
+            <li><a href="#a-timelines">Timelines &amp; inactivity</a></li>
+            <li><a href="#a-launch">Launch &amp; acceptance</a></li>
+            <li><a href="#a-annual">Annual Service</a></li>
+            <li><a href="#a-excluded">What's not included</a></li>
+            <li><a href="#a-billing">Billing &amp; renewal</a></li>
+            <li><a href="#a-price">Price changes</a></li>
+            <li><a href="#a-cancel">Cancelling</a></li>
+            <li><a href="#a-leaving">Leaving &amp; handover</a></li>
+            <li><a href="#a-domain">Domain names</a></li>
+            <li><a href="#a-ownership">Ownership</a></li>
+            <li><a href="#a-portfolio">Portfolio &amp; credit</a></li>
+            <li><a href="#a-thirdparty">Third-party services</a></li>
+            <li><a href="#a-uptime">Uptime</a></li>
+            <li><a href="#a-personal">Personal information</a></li>
+            <li><a href="#a-use">Acceptable use</a></li>
+            <li><a href="#a-nonpayment">Non-payment</a></li>
+            <li><a href="#a-warranties">Warranties</a></li>
+            <li><a href="#a-liability">Limitation of liability</a></li>
+            <li><a href="#a-indemnity">Your indemnity</a></li>
+            <li><a href="#a-terminate">If we terminate</a></li>
+            <li><a href="#a-changes">Changes to this Agreement</a></li>
+            <li><a href="#a-general">General</a></li>
+            <li><a href="#a-law">Language &amp; governing law</a></li>
+          </ol>
+        </nav>
+
+        <section id="a-definitions">
+          <h2><span class="n">01</span> Definitions</h2>
+          <ul>
+            <li><strong>Quote</strong> — the written quote or proposal describing your Project, its price, and its scope.</li>
+            <li><strong>Project</strong> — the website build described in the Quote.</li>
+            <li><strong>Site</strong> — the website we build for you.</li>
+            <li><strong>Build Fee</strong> — the one-time fee for the Project.</li>
+            <li><strong>Launch</strong> — the date your Site is first made publicly accessible at your domain.</li>
+            <li><strong>Annual Service</strong> — the hosting, domain, and support service described in Section 7.</li>
+            <li><strong>Annual Fee</strong> — the recurring yearly fee for the Annual Service.</li>
+            <li><strong>Renewal Date</strong> — each anniversary of Launch.</li>
+          </ul>
+        </section>
+
+        <section id="a-scope">
+          <h2><span class="n">02</span> Scope</h2>
+          <p>We will build the Site described in your Quote. The Quote is the definition of scope — anything not listed in it (additional pages, new features, e-commerce, booking systems, redesigns, changes of direction after approval) is out of scope.</p>
+          <p>Out-of-scope work isn't refused, it's re-quoted. We'll tell you before doing anything billable, give you a price, and wait for your go-ahead.</p>
+        </section>
+
+        <section id="a-fee">
+          <h2><span class="n">03</span> Build Fee</h2>
+          <p>The Build Fee is payable in full before we begin, unless your Quote sets out a different schedule.</p>
+          <p>The Build Fee is non-refundable once work has begun. It reserves your place in our schedule and covers work that starts immediately.</p>
+        </section>
+
+        <section id="a-you">
+          <h2><span class="n">04</span> Your responsibilities</h2>
+          <p>To keep your Project moving, you agree to:</p>
+          <ul>
+            <li>Provide accurate information about your business;</li>
+            <li>Supply your content — text, images, logo, menus, pricing, hours — in a usable format and in reasonable time, or ask us to produce it (quoted separately);</li>
+            <li>Review and approve work at each stage within a reasonable time.</li>
+          </ul>
+          <p>You confirm that everything you give us is yours to use and doesn't infringe anyone else's rights. You are responsible for the accuracy and legality of your content — including prices, claims about your business, professional credentials, and any legally required notices for your industry.</p>
+        </section>
+
+        <section id="a-timelines">
+          <h2><span class="n">05</span> Timelines and inactivity</h2>
+          <p>We aim to launch most sites within about two weeks of kickoff. Timelines depend on receiving your content, feedback, and approvals on schedule; delays on either side move the launch date.</p>
+          <p>If we don't hear from you for <strong>60 consecutive days</strong> during an active Project, we'll treat the Project as paused and may close it. The Build Fee is not refunded. If you want to restart later, we'll reinstate the Project subject to our availability and a reinstatement fee.</p>
+        </section>
+
+        <section id="a-launch">
+          <h2><span class="n">06</span> Launch and acceptance</h2>
+          <p>We'll show you the Site for final review before Launch. If you don't raise issues within <strong>7 days</strong> of us asking for final approval, the Site is treated as approved and we may launch it.</p>
+          <p>For <strong>two weeks after Launch</strong>, we'll fix errors, typos, broken links, and display problems at no charge. After that, changes fall under Section 7 or are quoted separately.</p>
+        </section>
+
+        <section id="a-annual">
+          <h2><span class="n">07</span> Annual Service — what's included</h2>
+          <p>The Annual Service begins at Launch and covers, for one year:</p>
+          <ul>
+            <li><strong>Hosting</strong> of your Site</li>
+            <li><strong>Domain registration and renewal</strong> for one standard domain, where the domain is registered through us</li>
+            <li><strong>SSL certificate</strong> and HTTPS</li>
+            <li><strong>Backups</strong> and restoration if something goes wrong on our side</li>
+            <li><strong>Platform maintenance</strong> — keeping the site's infrastructure current</li>
+            <li><strong>Content updates — one included edit per month.</strong> An edit is a request requiring up to one hour of work: text changes, swapping photos, updating hours, prices, menu items, staff, or service listings. Unused edits do not carry forward. Requests are normally handled within <strong>2 business days</strong>.</li>
+          </ul>
+          <p>Work beyond the included monthly hour is billed at $70 per hour. If a request looks like it will run past the included hour, we'll tell you and give you an estimate before continuing.</p>
+        </section>
+
+        <section id="a-excluded">
+          <h2><span class="n">08</span> What's not included</h2>
+          <p>The following are quoted separately:</p>
+          <ul>
+            <li>New pages, new sections, or new features</li>
+            <li>Redesigns or significant restructuring of the Site</li>
+            <li>E-commerce, booking systems, member logins, or custom functionality</li>
+            <li>Copywriting, photography, videography, or logo design</li>
+            <li>SEO campaigns, advertising management, or social media management</li>
+            <li>Third-party subscription costs (booking platforms, payment processors, premium plugins, additional domains)</li>
+            <li>Business email hosting</li>
+            <li>Recovering from problems caused by changes you or a third party make to the Site, domain, or accounts</li>
+            <li>Work required by changes to your legal or regulatory obligations</li>
+          </ul>
+        </section>
+
+        <section id="a-billing">
+          <h2><span class="n">09</span> Annual billing and automatic renewal</h2>
+          <p><strong>The Annual Fee is charged automatically each year on the Renewal Date, using the payment method you have on file.</strong> The first charge occurs at Launch. You authorize us to store your payment method with our payment processor and to charge it on each Renewal Date without further notice, subject to Section 10.</p>
+          <p>We'll email you a receipt for each charge. You can update your payment method at any time by contacting us.</p>
+          <p>Annual Fees are non-refundable. If you cancel, your service continues until the end of the term you've paid for — you don't lose time you've already paid for.</p>
+        </section>
+
+        <section id="a-price">
+          <h2><span class="n">10</span> Price changes</h2>
+          <p>We may change the Annual Fee. <strong>Any increase will be communicated to you by email at least 30 days before it takes effect</strong>, and an increase only ever takes effect on a Renewal Date.</p>
+          <p>This gives you a full two weeks of notice before your cancellation deadline under Section 11. If you don't want to continue at the new price, cancel before that deadline and nothing further is charged.</p>
+        </section>
+
+        <section id="a-cancel">
+          <h2><span class="n">11</span> Cancelling the Annual Service</h2>
+          <p><strong>To cancel, email <a class="inline" href="mailto:contact@parallexweb.com">contact@parallexweb.com</a> at least 14 days before your next Renewal Date.</strong> We'll confirm your cancellation in writing.</p>
+          <p>A cancellation received less than 14 days before the Renewal Date takes effect at the <em>following</em> Renewal Date, and the upcoming charge still applies.</p>
+          <p>When cancellation takes effect:</p>
+          <ul>
+            <li>Your Site is removed from our hosting on the Renewal Date;</li>
+            <li>We keep a copy of your Site files for <strong>30 days</strong> after that, then delete them;</li>
+            <li>Section 12 covers what you take with you.</li>
+          </ul>
+        </section>
+
+        <section id="a-leaving">
+          <h2><span class="n">12</span> Leaving — what you keep, and what handover costs</h2>
+          <p>Our build pricing is deliberately low. It's set on the assumption of an ongoing hosting and support relationship, and the Build Fee on its own doesn't cover the full value of the work. The Annual Service is what makes that pricing possible. Moving your Site elsewhere also involves real work on our side that isn't covered by fees you've already paid.</p>
+          <p>So, clearly:</p>
+          <h3>Included at no charge — your files.</h3>
+          <p>Once the Build Fee is paid in full, the finished Site is yours (Section 14). Within 10 business days of your service ending, we'll send you a download link containing your Site's complete source files — HTML, CSS, JavaScript, and images — plus any content you originally supplied. We will not withhold these, and we won't hold your Site hostage over a disagreement.</p>
+          <h3>Quoted separately — migration and handover services.</h3>
+          <p>If you want us to do more than hand you the files, that's additional work and we'll quote it before starting. This includes:</p>
+          <ul>
+            <li>Setting up and configuring your Site on a new host</li>
+            <li>Transferring or reconfiguring your domain and DNS beyond the standard transfer in Section 13</li>
+            <li>Migrating contact forms, analytics, integrations, or third-party connections</li>
+            <li>Producing documentation, walkthroughs, or technical guidance for you or a new provider</li>
+            <li>Coordinating directly with your new developer or agency</li>
+            <li>Any support during or after the transition</li>
+          </ul>
+          <h3>The hosting discount.</h3>
+          <p>Your invoice shows a discount applied to the Build Fee, reflecting a 24-month hosting relationship. That discount earns out over those 24 months — one twenty-fourth of it for each month of Annual Service. Once you've completed 24 months, it's fully yours and nothing further is owed, whenever you choose to move on.</p>
+          <p>If you move your Site elsewhere before then, we adjust for the part that hasn't been earned yet: the remaining months' share of the discount becomes payable. So if you leave at the end of your first year, half the discount remains, and half is repayable. The full discount amount is printed on your invoice, so the figure is easy to work out at any point.</p>
+          <p>Nothing is owed under this section if your business ceases operating, or if we end the Agreement ourselves under Section 24.</p>
+        </section>
+
+        <section id="a-domain">
+          <h2><span class="n">13</span> Domain names</h2>
+          <p>If your domain is registered through us, we register it in your business's name where the registrar allows it, and hold it on your behalf.</p>
+          <p><strong>The domain is yours.</strong> If you leave, we will release it or transfer it to a registrar account of your choosing at no charge beyond any registrar transfer cost, provided your account with us is paid in full. We'll do this within 10 business days of your written request. Registrar rules may impose their own waiting periods (typically 60 days after registration or a previous transfer) that are outside our control.</p>
+          <p>If you already own your domain, you keep it and remain responsible for its renewal.</p>
+        </section>
+
+        <section id="a-ownership">
+          <h2><span class="n">14</span> Ownership</h2>
+          <h3>What you own.</h3>
+          <p>Once the Build Fee is paid in full, you own the finished Site created specifically for you — the design and the content we produced for it. Anything you gave us stays yours.</p>
+          <h3>What we keep.</h3>
+          <p>We keep ownership of the underlying templates, components, code patterns, and techniques we reuse across projects, and the right to keep using them. Your ownership is of your finished Site, not of the toolkit it was built with.</p>
+          <h3>Third-party assets.</h3>
+          <p>Fonts, stock photography, icons, and platform features are licensed, not owned. They stay subject to their own licences, which we'll pass to you or set up under your accounts where relevant.</p>
+        </section>
+
+        <section id="a-portfolio">
+          <h2><span class="n">15</span> Portfolio and credit</h2>
+          <p>We may display your completed Site in our portfolio, on our website, and in marketing materials, and may include a small “Site by Parallex” credit in your Site's footer linking to parallexweb.com.</p>
+          <p>If you'd prefer we didn't do either, tell us in writing and we'll remove it.</p>
+        </section>
+
+        <section id="a-thirdparty">
+          <h2><span class="n">16</span> Third-party services</h2>
+          <p>Your Site depends on third-party services — hosting infrastructure, domain registrars, form handlers, analytics, embedded booking or payment tools. These have their own terms, pricing, and availability, all outside our control.</p>
+          <p>We're not responsible for outages, policy changes, price changes, or discontinuation by third parties. If a service we rely on changes its pricing materially, we may need to adjust your Annual Fee under Section 10 or move you to an alternative.</p>
+        </section>
+
+        <section id="a-uptime">
+          <h2><span class="n">17</span> Uptime</h2>
+          <p>We host on established infrastructure and use commercially reasonable efforts to keep your Site online. We do not guarantee uninterrupted availability, and we don't offer service credits for downtime. We'll tell you about planned maintenance that's likely to affect you.</p>
+        </section>
+
+        <section id="a-personal">
+          <h2><span class="n">18</span> Personal information</h2>
+          <p>Where your Site collects personal information — through a contact form, for example — you are the party responsible for that information and we handle it on your behalf and on your instructions.</p>
+          <p>We will use it only to provide the service, take reasonable steps to protect it, notify you promptly if we become aware of a confidentiality incident affecting it, and return or delete it when your service ends.</p>
+          <p>You're responsible for having a privacy policy on your Site and for meeting your own obligations under applicable privacy law, including Quebec's <em>Act respecting the protection of personal information in the private sector</em>. We can point you in the right direction, but we're not your privacy advisor.</p>
+        </section>
+
+        <section id="a-use">
+          <h2><span class="n">19</span> Acceptable use</h2>
+          <p>You agree not to use the Site or our hosting to publish anything illegal, misleading, defamatory, or infringing; to send unsolicited bulk email; to distribute malware; or in any way that puts our infrastructure or other clients at risk.</p>
+          <p>We may suspend or remove content that breaches this section, and will tell you why.</p>
+        </section>
+
+        <section id="a-nonpayment">
+          <h2><span class="n">20</span> Non-payment</h2>
+          <p>If a payment fails, we'll email you and retry. If it's still unpaid after <strong>14 days</strong>, we may suspend your Site — visitors see a placeholder rather than your Site. If it's unpaid after <strong>30 days</strong>, we may terminate the service and remove your Site.</p>
+          <p>We keep your Site files for 30 days after termination, then delete them. Reinstating a suspended or terminated Site requires payment of the outstanding balance plus a reinstatement fee.</p>
+        </section>
+
+        <section id="a-warranties">
+          <h2><span class="n">21</span> Warranties and disclaimers</h2>
+          <p>We'll perform our services with reasonable skill and care.</p>
+          <p>We do not guarantee business results, search rankings, traffic, leads, or revenue. Beyond the correction period in Section 6 and ongoing maintenance under Section 7, the Site is provided as is to the extent the law permits.</p>
+          <p>Unless your Quote specifically says otherwise, we don't warrant that the Site meets any particular accessibility standard, industry regulation, or legal requirement specific to your business.</p>
+        </section>
+
+        <section id="a-liability">
+          <h2><span class="n">22</span> Limitation of liability</h2>
+          <p>To the fullest extent the law allows, we are not liable for indirect, incidental, or consequential losses — including lost profits, lost business, or lost data.</p>
+          <p>Our total liability for any claim relating to your Project or the Annual Service is limited to the total amount you have paid us under this Agreement.</p>
+        </section>
+
+        <section id="a-indemnity">
+          <h2><span class="n">23</span> Your indemnity</h2>
+          <p>You'll indemnify us against claims, damages, and reasonable costs arising from content you supplied, from your use of the Site, or from your breach of Sections 4 or 19.</p>
+        </section>
+
+        <section id="a-terminate">
+          <h2><span class="n">24</span> If we terminate, or stop operating</h2>
+          <p>We may terminate this Agreement on <strong>60 days'</strong> written notice, or immediately if you breach Section 19 or fail to pay under Section 20.</p>
+          <p>If we terminate for convenience, or if Parallex ceases operating, we will:</p>
+          <ul>
+            <li>Give you at least 60 days' notice where reasonably possible;</li>
+            <li>Refund the unused portion of your Annual Fee on a pro-rata basis;</li>
+            <li>Provide the full handover described in Section 12 at no charge;</li>
+            <li>Release or transfer your domain to you at no charge;</li>
+            <li>Give you reasonable assistance in moving to a new provider.</li>
+          </ul>
+        </section>
+
+        <section id="a-changes">
+          <h2><span class="n">25</span> Changes to this Agreement</h2>
+          <p>We may update this Agreement. Changes take effect at your next Renewal Date and we'll email you at least <strong>30 days</strong> beforehand. If you don't accept the changes, cancel under Section 11 before the deadline.</p>
+          <p>Until then, the version you signed continues to apply.</p>
+        </section>
+
+        <section id="a-general">
+          <h2><span class="n">26</span> General</h2>
+          <h3>Independent contractor.</h3>
+          <p>We're an independent contractor, not your employee, partner, or agent.</p>
+          <h3>Force majeure.</h3>
+          <p>Neither party is liable for delays caused by events beyond its reasonable control.</p>
+          <h3>Assignment.</h3>
+          <p>You may not transfer this Agreement without our written consent. We may transfer it to a successor of our business, with notice to you.</p>
+          <h3>Notices.</h3>
+          <p>Notices go to the email addresses on file. Ours is <a class="inline" href="mailto:contact@parallexweb.com">contact@parallexweb.com</a>. Keep yours current — notices to a stale address still count as delivered.</p>
+          <h3>Severability.</h3>
+          <p>If any provision is unenforceable, the rest stays in force.</p>
+          <h3>Entire agreement.</h3>
+          <p>This Agreement, your Quote, and the published Terms &amp; Conditions are the whole agreement between us and replace any earlier discussions.</p>
+          <h3>Survival.</h3>
+          <p>Sections 12, 14, 15, 18, 21, 22, 23, and 27 survive termination.</p>
+        </section>
+
+        <section id="a-law">
+          <h2><span class="n">27</span> Language and governing law</h2>
+          <p>The parties have expressly requested that this Agreement and all related documents be drawn up in English. <em>Les parties ont expressément demandé que la présente entente et tous les documents qui s'y rattachent soient rédigés en anglais.</em></p>
+          <p>This Agreement is governed by the laws of the Province of Québec and the applicable federal laws of Canada. Any dispute will be heard by the courts of the judicial district of Montréal.</p>
+        </section>
+      </div>
+    </div>
+
+    <!-- ===================== FRANÇAIS ===================== -->
+    <div class="l-fr">
+      <p class="intro">La présente entente établit les conditions selon lesquelles Parallex Web Studio (« Parallex », « nous ») conçoit et soutient votre site Web. Elle s'applique parallèlement aux Conditions générales publiées sur parallexweb.com ; en cas de divergence entre les deux, la présente entente prévaut.</p>
+
+      <div class="content">
+        <div class="callout">
+          <p><strong>Votre acceptation.</strong> Vous acceptez la présente entente en la signant électroniquement. Votre signature électronique a la même valeur qu'une signature manuscrite. Nous vous ferons parvenir par courriel une copie de la version exacte que vous avez signée, et c'est cette version qui régit votre Projet. Le paiement des Frais de création vaut également acceptation.</p>
+        </div>
+
+        <nav class="toc" aria-label="Table des matières">
+          <h2>Sur cette page</h2>
+          <ol>
+            <li><a href="#e-definitions">Définitions</a></li>
+            <li><a href="#e-scope">Portée</a></li>
+            <li><a href="#e-fee">Frais de création</a></li>
+            <li><a href="#e-you">Vos responsabilités</a></li>
+            <li><a href="#e-timelines">Échéanciers et inactivité</a></li>
+            <li><a href="#e-launch">Mise en ligne</a></li>
+            <li><a href="#e-annual">Service annuel</a></li>
+            <li><a href="#e-excluded">Ce qui n'est pas inclus</a></li>
+            <li><a href="#e-billing">Facturation et renouvellement</a></li>
+            <li><a href="#e-price">Modification des prix</a></li>
+            <li><a href="#e-cancel">Résiliation</a></li>
+            <li><a href="#e-leaving">Départ et transfert</a></li>
+            <li><a href="#e-domain">Noms de domaine</a></li>
+            <li><a href="#e-ownership">Propriété</a></li>
+            <li><a href="#e-portfolio">Portfolio et mention</a></li>
+            <li><a href="#e-thirdparty">Services tiers</a></li>
+            <li><a href="#e-uptime">Disponibilité</a></li>
+            <li><a href="#e-personal">Renseignements personnels</a></li>
+            <li><a href="#e-use">Utilisation acceptable</a></li>
+            <li><a href="#e-nonpayment">Défaut de paiement</a></li>
+            <li><a href="#e-warranties">Garanties</a></li>
+            <li><a href="#e-liability">Limitation de responsabilité</a></li>
+            <li><a href="#e-indemnity">Votre indemnisation</a></li>
+            <li><a href="#e-terminate">Si nous mettons fin</a></li>
+            <li><a href="#e-changes">Modifications de l'entente</a></li>
+            <li><a href="#e-general">Dispositions générales</a></li>
+            <li><a href="#e-law">Langue et droit applicable</a></li>
+          </ol>
+        </nav>
+
+        <section id="e-definitions">
+          <h2><span class="n">01</span> Définitions</h2>
+          <ul>
+            <li><strong>Soumission</strong> — la soumission ou proposition écrite décrivant votre Projet, son prix et sa portée.</li>
+            <li><strong>Projet</strong> — la création du site Web décrite dans la Soumission.</li>
+            <li><strong>Site</strong> — le site Web que nous créons pour vous.</li>
+            <li><strong>Frais de création</strong> — les frais uniques pour le Projet.</li>
+            <li><strong>Mise en ligne</strong> — la date à laquelle votre Site devient accessible au public à votre nom de domaine.</li>
+            <li><strong>Service annuel</strong> — le service d'hébergement, de domaine et de soutien décrit à l'article 7.</li>
+            <li><strong>Frais annuels</strong> — les frais récurrents annuels du Service annuel.</li>
+            <li><strong>Date de renouvellement</strong> — chaque anniversaire de la Mise en ligne.</li>
+          </ul>
+        </section>
+
+        <section id="e-scope">
+          <h2><span class="n">02</span> Portée</h2>
+          <p>Nous créons le Site décrit dans votre Soumission. La Soumission définit la portée du travail — tout ce qui n'y figure pas (pages supplémentaires, nouvelles fonctionnalités, commerce en ligne, systèmes de réservation, refontes, changements d'orientation après approbation) est hors portée.</p>
+          <p>Le travail hors portée n'est pas refusé, il fait l'objet d'une nouvelle soumission. Nous vous en informons avant d'effectuer tout travail facturable, vous donnons un prix et attendons votre accord.</p>
+        </section>
+
+        <section id="e-fee">
+          <h2><span class="n">03</span> Frais de création</h2>
+          <p>Les Frais de création sont payables en totalité avant le début des travaux, à moins que votre Soumission ne prévoie un échéancier différent.</p>
+          <p>Les Frais de création ne sont pas remboursables une fois les travaux commencés. Ils réservent votre place à notre calendrier et couvrent le travail qui débute immédiatement.</p>
+        </section>
+
+        <section id="e-you">
+          <h2><span class="n">04</span> Vos responsabilités</h2>
+          <p>Pour que votre Projet avance, vous vous engagez à :</p>
+          <ul>
+            <li>Fournir des renseignements exacts sur votre entreprise ;</li>
+            <li>Fournir votre contenu — textes, images, logo, menus, prix, heures d'ouverture — dans un format utilisable et dans un délai raisonnable, ou nous demander de le produire (soumis séparément) ;</li>
+            <li>Réviser et approuver le travail à chaque étape dans un délai raisonnable.</li>
+          </ul>
+          <p>Vous confirmez que tout ce que vous nous fournissez vous appartient et ne porte atteinte aux droits de personne. Vous êtes responsable de l'exactitude et de la légalité de votre contenu — y compris les prix, les affirmations concernant votre entreprise, vos titres professionnels et toute mention exigée par la loi dans votre secteur.</p>
+        </section>
+
+        <section id="e-timelines">
+          <h2><span class="n">05</span> Échéanciers et inactivité</h2>
+          <p>Nous visons la mise en ligne de la plupart des sites dans un délai d'environ deux semaines suivant le lancement du Projet. Les échéanciers dépendent de la réception de votre contenu, de vos commentaires et de vos approbations dans les délais prévus ; un retard de part et d'autre repousse la date de mise en ligne.</p>
+          <p>Si nous restons <strong>60 jours consécutifs</strong> sans nouvelles de vous pendant un Projet en cours, nous considérerons le Projet comme suspendu et pourrons y mettre fin. Les Frais de création ne sont pas remboursés. Si vous souhaitez reprendre le Projet par la suite, nous le rétablirons sous réserve de nos disponibilités et moyennant des frais de reprise.</p>
+        </section>
+
+        <section id="e-launch">
+          <h2><span class="n">06</span> Mise en ligne et acceptation</h2>
+          <p>Nous vous présentons le Site pour révision finale avant la Mise en ligne. Si vous ne soulevez aucun problème dans les <strong>7 jours</strong> suivant notre demande d'approbation finale, le Site est réputé approuvé et nous pouvons le mettre en ligne.</p>
+          <p>Pendant les <strong>deux semaines suivant la Mise en ligne</strong>, nous corrigeons sans frais les erreurs, les fautes de frappe, les liens brisés et les problèmes d'affichage. Par la suite, les modifications relèvent de l'article 7 ou font l'objet d'une soumission distincte.</p>
+        </section>
+
+        <section id="e-annual">
+          <h2><span class="n">07</span> Service annuel — ce qui est inclus</h2>
+          <p>Le Service annuel débute à la Mise en ligne et couvre, pour une durée d'un an :</p>
+          <ul>
+            <li><strong>L'hébergement</strong> de votre Site</li>
+            <li><strong>L'enregistrement et le renouvellement du domaine</strong> pour un domaine standard, lorsque le domaine est enregistré par notre intermédiaire</li>
+            <li><strong>Le certificat SSL</strong> et le protocole HTTPS</li>
+            <li><strong>Les sauvegardes</strong> et la restauration en cas de problème de notre côté</li>
+            <li><strong>L'entretien de la plateforme</strong> — le maintien à jour de l'infrastructure du site</li>
+            <li><strong>Les mises à jour de contenu — une modification incluse par mois.</strong> Une modification est une demande nécessitant jusqu'à une heure de travail : changements de texte, remplacement de photos, mise à jour des heures d'ouverture, des prix, des articles de menu, du personnel ou de la liste des services. Les modifications non utilisées ne sont pas reportées. Les demandes sont normalement traitées dans un délai de <strong>2 jours ouvrables</strong>.</li>
+          </ul>
+          <p>Le travail dépassant l'heure mensuelle incluse est facturé à 70 $ l'heure. Si une demande semble devoir dépasser l'heure incluse, nous vous en informons et vous fournissons une estimation avant de poursuivre.</p>
+        </section>
+
+        <section id="e-excluded">
+          <h2><span class="n">08</span> Ce qui n'est pas inclus</h2>
+          <p>Les éléments suivants font l'objet d'une soumission distincte :</p>
+          <ul>
+            <li>Nouvelles pages, nouvelles sections ou nouvelles fonctionnalités</li>
+            <li>Refontes ou restructurations importantes du Site</li>
+            <li>Commerce en ligne, systèmes de réservation, comptes membres ou fonctionnalités sur mesure</li>
+            <li>Rédaction, photographie, vidéographie ou conception de logo</li>
+            <li>Campagnes de référencement (SEO), gestion publicitaire ou gestion des médias sociaux</li>
+            <li>Coûts d'abonnement à des services tiers (plateformes de réservation, processeurs de paiement, extensions payantes, domaines supplémentaires)</li>
+            <li>Hébergement de courriels d'entreprise</li>
+            <li>La résolution de problèmes causés par des modifications que vous ou un tiers apportez au Site, au domaine ou aux comptes</li>
+            <li>Le travail rendu nécessaire par un changement de vos obligations légales ou réglementaires</li>
+          </ul>
+        </section>
+
+        <section id="e-billing">
+          <h2><span class="n">09</span> Facturation annuelle et renouvellement automatique</h2>
+          <p><strong>Les Frais annuels sont prélevés automatiquement chaque année à la Date de renouvellement, à l'aide du mode de paiement enregistré à votre dossier.</strong> Le premier prélèvement a lieu à la Mise en ligne. Vous nous autorisez à conserver votre mode de paiement auprès de notre processeur de paiement et à le débiter à chaque Date de renouvellement sans autre avis, sous réserve de l'article 10.</p>
+          <p>Nous vous envoyons un reçu par courriel pour chaque prélèvement. Vous pouvez modifier votre mode de paiement en tout temps en communiquant avec nous.</p>
+          <p>Les Frais annuels ne sont pas remboursables. Si vous résiliez, votre service se poursuit jusqu'à la fin de la période que vous avez payée — vous ne perdez pas le temps déjà payé.</p>
+        </section>
+
+        <section id="e-price">
+          <h2><span class="n">10</span> Modification des prix</h2>
+          <p>Nous pouvons modifier les Frais annuels. <strong>Toute augmentation vous sera communiquée par courriel au moins 30 jours avant sa prise d'effet</strong>, et une augmentation ne prend jamais effet qu'à une Date de renouvellement.</p>
+          <p>Vous disposez ainsi de deux semaines complètes avant la date limite de résiliation prévue à l'article 11. Si vous ne souhaitez pas continuer au nouveau prix, résiliez avant cette date limite et rien de plus ne vous sera facturé.</p>
+        </section>
+
+        <section id="e-cancel">
+          <h2><span class="n">11</span> Résiliation du Service annuel</h2>
+          <p><strong>Pour résilier, écrivez à <a class="inline" href="mailto:contact@parallexweb.com">contact@parallexweb.com</a> au moins 14 jours avant votre prochaine Date de renouvellement.</strong> Nous confirmerons votre résiliation par écrit.</p>
+          <p>Une résiliation reçue moins de 14 jours avant la Date de renouvellement prend effet à la Date de renouvellement <em>suivante</em>, et le prélèvement à venir s'applique tout de même.</p>
+          <p>Lorsque la résiliation prend effet :</p>
+          <ul>
+            <li>Votre Site est retiré de notre hébergement à la Date de renouvellement ;</li>
+            <li>Nous conservons une copie des fichiers de votre Site pendant <strong>30 jours</strong> par la suite, puis nous les supprimons ;</li>
+            <li>L'article 12 précise ce que vous emportez avec vous.</li>
+          </ul>
+        </section>
+
+        <section id="e-leaving">
+          <h2><span class="n">12</span> Départ — ce que vous conservez et ce que coûte le transfert</h2>
+          <p>Nos prix de création sont volontairement bas. Ils reposent sur une relation continue d'hébergement et de soutien, et les Frais de création à eux seuls ne couvrent pas la pleine valeur du travail. C'est le Service annuel qui rend ces prix possibles. Déplacer votre Site ailleurs représente par ailleurs un travail réel de notre côté qui n'est pas couvert par les frais que vous avez déjà payés.</p>
+          <p>Donc, en toute clarté :</p>
+          <h3>Inclus sans frais — vos fichiers.</h3>
+          <p>Une fois les Frais de création payés en totalité, le Site terminé vous appartient (article 14). Dans les 10 jours ouvrables suivant la fin de votre service, nous vous transmettons un lien de téléchargement contenant l'ensemble des fichiers sources de votre Site — HTML, CSS, JavaScript et images — ainsi que tout contenu que vous nous aviez fourni. Nous ne les retiendrons pas et nous ne prendrons jamais votre Site en otage à la faveur d'un désaccord.</p>
+          <h3>Soumis séparément — services de migration et de transfert.</h3>
+          <p>Si vous souhaitez que nous fassions plus que vous remettre les fichiers, il s'agit d'un travail supplémentaire que nous soumissionnons avant de commencer. Cela comprend :</p>
+          <ul>
+            <li>L'installation et la configuration de votre Site chez un nouvel hébergeur</li>
+            <li>Le transfert ou la reconfiguration de votre domaine et de vos DNS au-delà du transfert standard prévu à l'article 13</li>
+            <li>La migration des formulaires de contact, des outils d'analyse, des intégrations ou des connexions à des services tiers</li>
+            <li>La production de documentation, de guides ou de conseils techniques pour vous ou pour un nouveau fournisseur</li>
+            <li>La coordination directe avec votre nouveau développeur ou votre nouvelle agence</li>
+            <li>Tout soutien pendant ou après la transition</li>
+          </ul>
+          <h3>Le rabais lié à l'hébergement.</h3>
+          <p>Votre facture indique un rabais appliqué aux Frais de création, qui correspond à une relation d'hébergement de 24 mois. Ce rabais s'acquiert progressivement sur ces 24 mois — un vingt-quatrième pour chaque mois de Service annuel. Une fois les 24 mois écoulés, il vous est entièrement acquis et plus rien n'est dû, quel que soit le moment où vous décidez de partir.</p>
+          <p>Si vous déplacez votre Site ailleurs avant ce terme, nous ajustons la portion qui n'a pas encore été acquise : la part du rabais correspondant aux mois restants devient payable. Ainsi, si vous partez à la fin de votre première année, la moitié du rabais vous demeure acquise et l'autre moitié est remboursable. Le montant total du rabais figure sur votre facture, ce qui rend le calcul facile à faire en tout temps.</p>
+          <p>Rien n'est dû en vertu du présent article si votre entreprise cesse ses activités, ou si nous mettons nous-mêmes fin à l'entente en vertu de l'article 24.</p>
+        </section>
+
+        <section id="e-domain">
+          <h2><span class="n">13</span> Noms de domaine</h2>
+          <p>Si votre domaine est enregistré par notre intermédiaire, nous l'enregistrons au nom de votre entreprise lorsque le registraire le permet, et nous le détenons pour votre compte.</p>
+          <p><strong>Le domaine vous appartient.</strong> Si vous nous quittez, nous le libérerons ou le transférerons vers un compte de registraire de votre choix, sans frais autres que les frais de transfert du registraire, à condition que votre compte chez nous soit entièrement payé. Nous procéderons dans les 10 jours ouvrables suivant votre demande écrite. Les règles des registraires peuvent imposer leurs propres délais d'attente (généralement 60 jours après un enregistrement ou un transfert antérieur), lesquels échappent à notre contrôle.</p>
+          <p>Si vous êtes déjà propriétaire de votre domaine, il demeure le vôtre et vous restez responsable de son renouvellement.</p>
+        </section>
+
+        <section id="e-ownership">
+          <h2><span class="n">14</span> Propriété</h2>
+          <h3>Ce qui vous appartient.</h3>
+          <p>Une fois les Frais de création payés en totalité, vous êtes propriétaire du Site terminé créé spécifiquement pour vous — le design ainsi que le contenu que nous avons produit pour celui-ci. Tout ce que vous nous avez fourni demeure vôtre.</p>
+          <h3>Ce que nous conservons.</h3>
+          <p>Nous conservons la propriété des gabarits, composants, structures de code et techniques sous-jacents que nous réutilisons d'un projet à l'autre, ainsi que le droit de continuer à les utiliser. Votre propriété porte sur votre Site terminé, et non sur les outils qui ont servi à le construire.</p>
+          <h3>Éléments de tiers.</h3>
+          <p>Les polices de caractères, les photographies de banques d'images, les icônes et les fonctionnalités de plateformes font l'objet de licences et ne sont pas notre propriété. Elles demeurent assujetties à leurs propres licences, que nous vous transmettrons ou établirons sous vos comptes s'il y a lieu.</p>
+        </section>
+
+        <section id="e-portfolio">
+          <h2><span class="n">15</span> Portfolio et mention</h2>
+          <p>Nous pouvons présenter votre Site terminé dans notre portfolio, sur notre site Web et dans notre matériel promotionnel, et y inclure une discrète mention « Site par Parallex » dans le pied de page de votre Site, avec un lien vers parallexweb.com.</p>
+          <p>Si vous préférez que nous nous abstenions de l'un ou l'autre, faites-le-nous savoir par écrit et nous le retirerons.</p>
+        </section>
+
+        <section id="e-thirdparty">
+          <h2><span class="n">16</span> Services tiers</h2>
+          <p>Votre Site dépend de services tiers — infrastructure d'hébergement, registraires de domaines, gestionnaires de formulaires, outils d'analyse, modules de réservation ou de paiement intégrés. Ces services ont leurs propres conditions, prix et disponibilité, tous hors de notre contrôle.</p>
+          <p>Nous ne sommes pas responsables des pannes, des changements de politique, des hausses de prix ni de l'arrêt de services offerts par des tiers. Si un service dont nous dépendons modifie sensiblement ses prix, il se peut que nous devions ajuster vos Frais annuels en vertu de l'article 10 ou vous orienter vers une solution de rechange.</p>
+        </section>
+
+        <section id="e-uptime">
+          <h2><span class="n">17</span> Disponibilité</h2>
+          <p>Nous hébergeons sur une infrastructure éprouvée et déployons des efforts commercialement raisonnables pour garder votre Site en ligne. Nous ne garantissons pas une disponibilité ininterrompue et n'offrons pas de crédits de service en cas d'interruption. Nous vous informerons des entretiens planifiés susceptibles de vous affecter.</p>
+        </section>
+
+        <section id="e-personal">
+          <h2><span class="n">18</span> Renseignements personnels</h2>
+          <p>Lorsque votre Site recueille des renseignements personnels — au moyen d'un formulaire de contact, par exemple — vous êtes la partie responsable de ces renseignements et nous les traitons pour votre compte et suivant vos instructions.</p>
+          <p>Nous les utiliserons uniquement pour fournir le service, prendrons des mesures raisonnables pour les protéger, vous aviserons promptement si nous prenons connaissance d'un incident de confidentialité les concernant, et vous les remettrons ou les supprimerons à la fin de votre service.</p>
+          <p>Il vous incombe d'avoir une politique de confidentialité sur votre Site et de respecter vos propres obligations en vertu des lois applicables en matière de protection des renseignements personnels, notamment la <em>Loi sur la protection des renseignements personnels dans le secteur privé</em>. Nous pouvons vous orienter, mais nous ne sommes pas votre conseiller en matière de protection des renseignements personnels.</p>
+        </section>
+
+        <section id="e-use">
+          <h2><span class="n">19</span> Utilisation acceptable</h2>
+          <p>Vous vous engagez à ne pas utiliser le Site ni notre hébergement pour publier quoi que ce soit d'illégal, de trompeur, de diffamatoire ou de contrefaisant ; pour envoyer des courriels non sollicités en masse ; pour diffuser des logiciels malveillants ; ni d'une manière qui mettrait en péril notre infrastructure ou nos autres clients.</p>
+          <p>Nous pouvons suspendre ou retirer tout contenu contrevenant au présent article, et nous vous en expliquerons la raison.</p>
+        </section>
+
+        <section id="e-nonpayment">
+          <h2><span class="n">20</span> Défaut de paiement</h2>
+          <p>Si un paiement échoue, nous vous écrivons et effectuons une nouvelle tentative. S'il demeure impayé après <strong>14 jours</strong>, nous pouvons suspendre votre Site — les visiteurs voient alors une page temporaire plutôt que votre Site. S'il demeure impayé après <strong>30 jours</strong>, nous pouvons mettre fin au service et retirer votre Site.</p>
+          <p>Nous conservons les fichiers de votre Site pendant 30 jours après la résiliation, puis nous les supprimons. Le rétablissement d'un Site suspendu ou résilié exige le paiement du solde impayé ainsi que des frais de rétablissement.</p>
+        </section>
+
+        <section id="e-warranties">
+          <h2><span class="n">21</span> Garanties et limitations</h2>
+          <p>Nous exécuterons nos services avec une compétence et un soin raisonnables.</p>
+          <p>Nous ne garantissons aucun résultat commercial, positionnement dans les moteurs de recherche, achalandage, demande de clients potentiels ni revenu. Au-delà de la période de correction prévue à l'article 6 et de l'entretien continu prévu à l'article 7, le Site est fourni tel quel dans la mesure permise par la loi.</p>
+          <p>À moins que votre Soumission ne le prévoie expressément, nous ne garantissons pas que le Site respecte une norme d'accessibilité, une réglementation sectorielle ou une exigence légale propre à votre entreprise.</p>
+        </section>
+
+        <section id="e-liability">
+          <h2><span class="n">22</span> Limitation de responsabilité</h2>
+          <p>Dans toute la mesure permise par la loi, nous ne sommes pas responsables des pertes indirectes, accessoires ou consécutives — y compris la perte de profits, la perte de clientèle ou la perte de données.</p>
+          <p>Notre responsabilité totale à l'égard de toute réclamation liée à votre Projet ou au Service annuel est limitée au montant total que vous nous avez versé en vertu de la présente entente.</p>
+        </section>
+
+        <section id="e-indemnity">
+          <h2><span class="n">23</span> Votre indemnisation</h2>
+          <p>Vous nous indemniserez à l'égard des réclamations, dommages et frais raisonnables découlant du contenu que vous avez fourni, de votre utilisation du Site, ou de votre manquement aux articles 4 ou 19.</p>
+        </section>
+
+        <section id="e-terminate">
+          <h2><span class="n">24</span> Si nous mettons fin à l'entente ou cessons nos activités</h2>
+          <p>Nous pouvons mettre fin à la présente entente moyennant un préavis écrit de <strong>60 jours</strong>, ou immédiatement si vous contrevenez à l'article 19 ou faites défaut de payer aux termes de l'article 20.</p>
+          <p>Si nous mettons fin à l'entente par commodité, ou si Parallex cesse ses activités, nous nous engageons à :</p>
+          <ul>
+            <li>Vous donner un préavis d'au moins 60 jours dans la mesure du raisonnablement possible ;</li>
+            <li>Vous rembourser la portion inutilisée de vos Frais annuels au prorata ;</li>
+            <li>Vous fournir sans frais le transfert complet décrit à l'article 12 ;</li>
+            <li>Libérer ou vous transférer votre domaine sans frais ;</li>
+            <li>Vous prêter une assistance raisonnable dans votre transition vers un nouveau fournisseur.</li>
+          </ul>
+        </section>
+
+        <section id="e-changes">
+          <h2><span class="n">25</span> Modifications de la présente entente</h2>
+          <p>Nous pouvons mettre à jour la présente entente. Les modifications prennent effet à votre prochaine Date de renouvellement et nous vous en aviserons par courriel au moins <strong>30 jours</strong> à l'avance. Si vous n'acceptez pas les modifications, résiliez en vertu de l'article 11 avant la date limite.</p>
+          <p>D'ici là, la version que vous avez signée continue de s'appliquer.</p>
+        </section>
+
+        <section id="e-general">
+          <h2><span class="n">26</span> Dispositions générales</h2>
+          <h3>Entrepreneur indépendant.</h3>
+          <p>Nous agissons à titre d'entrepreneur indépendant, et non d'employé, d'associé ou de mandataire.</p>
+          <h3>Force majeure.</h3>
+          <p>Aucune des parties n'est responsable des retards causés par des événements échappant à son contrôle raisonnable.</p>
+          <h3>Cession.</h3>
+          <p>Vous ne pouvez céder la présente entente sans notre consentement écrit. Nous pouvons la céder à un successeur de notre entreprise, moyennant un avis à votre intention.</p>
+          <h3>Avis.</h3>
+          <p>Les avis sont transmis aux adresses courriel au dossier. La nôtre est <a class="inline" href="mailto:contact@parallexweb.com">contact@parallexweb.com</a>. Gardez la vôtre à jour — un avis envoyé à une adresse désuète est tout de même réputé livré.</p>
+          <h3>Divisibilité.</h3>
+          <p>Si une disposition est inapplicable, les autres demeurent en vigueur.</p>
+          <h3>Intégralité de l'entente.</h3>
+          <p>La présente entente, votre Soumission et les Conditions générales publiées constituent l'intégralité de l'entente entre nous et remplacent toute discussion antérieure.</p>
+          <h3>Survie.</h3>
+          <p>Les articles 12, 14, 15, 18, 21, 22, 23 et 27 survivent à la résiliation.</p>
+        </section>
+
+        <section id="e-law">
+          <h2><span class="n">27</span> Langue et droit applicable</h2>
+          <p>La présente entente est rédigée en français. Une version anglaise est disponible sur demande ; les parties peuvent convenir d'être liées par cette version anglaise après que le client aura pris connaissance de la version française.</p>
+          <p>La présente entente est régie par les lois de la province de Québec et les lois fédérales du Canada qui y sont applicables. Tout litige sera soumis aux tribunaux du district judiciaire de Montréal.</p>
+        </section>
+      </div>
+    </div>
+
+    <!-- ===================== ACCEPTANCE (shared) ===================== -->
+    <div class="accept">
+      <span class="eyebrow" data-en="Acceptance" data-fr="Acceptation">Acceptance</span>
+      <h2 data-en="How you accept" data-fr="Votre acceptation">How you accept</h2>
+      <p data-en="By checking the acceptance box on the payment page, you confirm that you have read and understood this Agreement, that you had the opportunity to review it before payment, and that you agree to be bound by it. Payment of the Build Fee also constitutes acceptance." data-fr="En cochant la case d'acceptation sur la page de paiement, vous confirmez avoir lu et compris la présente entente, avoir eu l'occasion de l'examiner avant le paiement, et accepter d'y être lié. Le paiement des Frais de création vaut également acceptation.">By checking the acceptance box on the payment page, you confirm that you have read and understood this Agreement, that you had the opportunity to review it before payment, and that you agree to be bound by it. Payment of the Build Fee also constitutes acceptance.</p>
+
+      <div class="accept-parties">
+        <strong>Parallex Web Studio</strong><br />
+        <a href="mailto:contact@parallexweb.com">contact@parallexweb.com</a> · <a href="tel:+15147174724">514-717-4724</a> · parallexweb.com<br />
+        <span data-en="Agreement version 1.0" data-fr="Entente version 1.0">Agreement version 1.0</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot-inner">
+    <span data-en="© 2026 Parallex Web Studio. All rights reserved." data-fr="© 2026 Studio Web Parallex. Tous droits réservés.">© 2026 Parallex Web Studio. All rights reserved.</span>
+    <span class="links">
+      <a href="index.html" data-en="Home" data-fr="Accueil">Home</a>
+      <a href="privacy.html" data-en="Privacy" data-fr="Confidentialité">Privacy</a>
+      <a href="terms.html" data-en="Terms" data-fr="Conditions">Terms</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+  const STR = document.querySelectorAll('[data-en]');
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    document.documentElement.setAttribute('data-lang', lang);
+    STR.forEach(el => { const v = el.dataset[lang]; if (v != null) el.innerHTML = v; });
+    document.querySelector('.en-lbl').classList.toggle('on', lang === 'en');
+    document.querySelector('.fr-lbl').classList.toggle('on', lang === 'fr');
+    try { localStorage.setItem('parallex-lang', lang); } catch(e){}
+  }
+  const saved = (() => { try { return localStorage.getItem('parallex-lang'); } catch(e){ return null; } })();
+  setLang(saved === 'fr' ? 'fr' : 'en');
+  document.getElementById('langToggle').addEventListener('click', () => {
+    setLang(document.documentElement.getAttribute('data-lang') === 'en' ? 'fr' : 'en');
+  });
+</script>
+</body>
+</html>
